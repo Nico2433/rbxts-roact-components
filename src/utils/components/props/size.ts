@@ -1,9 +1,23 @@
 import { SizeClassName } from "../../../types";
-import { numbersPattern } from "../../string";
+import { isFloat } from "../../numbers";
 import { sizeClassNamePattern, validateSizeClassName } from "../../validators";
 
 export const getSizeValues = (className: string) => {
-	const matches = className.gmatch(sizeClassNamePattern)();
+	const matches: (string | number)[] = [];
+
+	sizeClassNamePattern.forEach((pattern) => {
+		const match = className.gmatch(pattern);
+
+		let stop = 0;
+		while (stop === 0) {
+			const value = match()[0];
+			if (value) {
+				matches.push(value);
+			} else {
+				stop = 1;
+			}
+		}
+	});
 
 	const props: Props = {
 		x: 0,
@@ -16,25 +30,20 @@ export const getSizeValues = (className: string) => {
 		}
 	}
 
-	const xString = typeIs(props.x, "string");
-	const yString = typeIs(props.y, "string");
+	const xFloat = isFloat(props.x);
+	const yFloat = isFloat(props.y);
 
-	return new UDim2(
-		xString ? tonumber((props.x as string).match(numbersPattern)[0]) ?? 0 : 0,
-		xString ? 0 : (props.x as number),
-		yString ? tonumber((props.y as string).match(numbersPattern)[0]) ?? 0 : 0,
-		yString ? 0 : (props.y as number),
-	);
+	return new UDim2(xFloat ? props.x : 0, xFloat ? 0 : props.x, yFloat ? props.y : 0, yFloat ? 0 : props.y);
 };
 
 interface Props {
-	x: number | string;
-	y: number | string;
+	x: number;
+	y: number;
 }
 
 interface Params {
 	apply: SizeClassName;
-	value: number | string;
+	value: number;
 }
 
 const getSizeProps = ({ apply, value }: Params, props: Props) => {

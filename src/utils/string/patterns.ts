@@ -1,3 +1,3 @@
-export const numbersPattern = "%d+";
+export const numbersPattern = "%d+%.?%d*";
 
 export const bracketsPattern = "%[.*%]";
