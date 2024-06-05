@@ -6,7 +6,7 @@
 	"scripts": {
 		"build": "rbxtsc",
 		"watch": "rbxtsc -w",
-		"release": "pnpm build && git push --follow-tags origin main"
+		"release": "pnpm build && git push --follow-tags origin main && npm publish"
 	},
 	"keywords": [],
 	"author": "nico2433",
