@@ -11,7 +11,7 @@ export const validateSizeClassName = (className: string) => {
 	if (second === "px") {
 		value = 1;
 	} else if (matchedBars) {
-		value = matchedBars;
+		value = second;
 	} else {
 		value = tonumber(second);
 	}

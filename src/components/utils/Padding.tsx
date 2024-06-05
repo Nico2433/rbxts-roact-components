@@ -1,27 +1,12 @@
 import React from "@rbxts/react";
-import { getPaddingProps, paddingClassNamePattern, validatePaddingClassName } from "../../utils";
+import { getPaddingProps, matchAllString, paddingClassNamePattern, validatePaddingClassName } from "../../utils";
 
 interface Props {
 	className?: string;
 }
 
 const Padding: React.FC<Readonly<Props>> = ({ className = "" }) => {
-	const matches: (string | number)[] = [];
-
-	paddingClassNamePattern.forEach((pattern) => {
-		const match = className.gmatch(pattern);
-
-		let stop = 0;
-		while (stop === 0) {
-			const value = match()[0];
-			if (value) {
-				matches.push(value);
-			} else {
-				stop = 1;
-			}
-		}
-	});
-
+	const matches: string[] = matchAllString(className, paddingClassNamePattern);
 	if (matches.isEmpty()) return;
 
 	const props: Partial<Pick<UIPadding, "PaddingTop" | "PaddingRight" | "PaddingBottom" | "PaddingLeft">> = {};

@@ -1,33 +1,17 @@
 import { SizeClassName } from "../../../types";
 import { isFloat } from "../../numbers";
-import { sizeClassNamePattern, validateSizeClassName } from "../../validators";
+import { matchAllString, sizeClassNamePattern, validateSizeClassName } from "../../validators";
 
 export const getSizeValues = (className: string) => {
-	const matches: (string | number)[] = [];
-
-	sizeClassNamePattern.forEach((pattern) => {
-		const match = className.gmatch(pattern);
-
-		let stop = 0;
-		while (stop === 0) {
-			const value = match()[0];
-			if (value) {
-				matches.push(value);
-			} else {
-				stop = 1;
-			}
-		}
-	});
+	const matches: string[] = matchAllString(className, sizeClassNamePattern);
 
 	const props: Props = {
 		x: 0,
 		y: 0,
 	};
 	for (const match of matches) {
-		if (typeIs(match, "string")) {
-			const validated = validateSizeClassName(match);
-			getSizeProps(validated, props);
-		}
+		const validated = validateSizeClassName(match);
+		getSizeProps(validated, props);
 	}
 
 	const xFloat = isFloat(props.x);
