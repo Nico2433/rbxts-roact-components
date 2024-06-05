@@ -3,16 +3,15 @@ import { numbersPattern } from "../../string";
 import { sizeClassNamePattern, validateSizeClassName } from "../../validators";
 
 export const getSizeValues = (className: string) => {
-	const matches = className.gmatch(sizeClassNamePattern);
+	const matches = className.gmatch(sizeClassNamePattern)();
 
 	const props: Props = {
 		x: 0,
 		y: 0,
 	};
 	for (const match of matches) {
-		const matchValue = match[0];
-		if (typeIs(matchValue, "string")) {
-			const validated = validateSizeClassName(matchValue);
+		if (typeIs(match, "string")) {
+			const validated = validateSizeClassName(match);
 			getSizeProps(validated, props);
 		}
 	}

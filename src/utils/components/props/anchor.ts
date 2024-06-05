@@ -2,16 +2,15 @@ import { AnchorClassName } from "../../../types";
 import { anchorClassNamePattern, validateAnchorClassName } from "../../validators";
 
 export const getAnchorValues = (className: string) => {
-	const matches = className.gmatch(anchorClassNamePattern);
+	const matches = className.gmatch(anchorClassNamePattern)();
 
 	const props: Props = {
 		x: undefined,
 		y: undefined,
 	};
 	for (const match of matches) {
-		const matchValue = match[0];
-		if (typeIs(matchValue, "string")) {
-			const validated = validateAnchorClassName(matchValue);
+		if (typeIs(match, "string")) {
+			const validated = validateAnchorClassName(match);
 			getAnchorProps(validated, props);
 		}
 	}

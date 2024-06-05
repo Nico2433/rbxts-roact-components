@@ -6,13 +6,13 @@ interface Props {
 }
 
 const Padding: React.FC<Readonly<Props>> = ({ className = "" }) => {
-	const matches = className.gmatch(paddingClassNamePattern);
+	const matches = className.gmatch(paddingClassNamePattern)();
+	if (matches.size() < 1) return;
 
 	const props: Partial<Pick<UIPadding, "PaddingTop" | "PaddingRight" | "PaddingBottom" | "PaddingLeft">> = {};
 	for (const match of matches) {
-		const matchValue = match[0];
-		if (typeIs(matchValue, "string")) {
-			const validated = validatePaddingClassName(matchValue);
+		if (typeIs(match, "string")) {
+			const validated = validatePaddingClassName(match);
 			getPaddingProps(validated, props);
 		}
 	}
