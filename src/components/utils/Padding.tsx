@@ -11,10 +11,8 @@ const Padding: React.FC<Readonly<Props>> = ({ className = "" }) => {
 
 	const props: Partial<Pick<UIPadding, "PaddingTop" | "PaddingRight" | "PaddingBottom" | "PaddingLeft">> = {};
 	for (const match of matches) {
-		if (typeIs(match, "string")) {
-			const validated = validatePaddingClassName(match);
-			getPaddingProps(validated, props);
-		}
+		const validated = validatePaddingClassName(match);
+		getPaddingProps(validated, props);
 	}
 
 	return <uipadding {...props} />;

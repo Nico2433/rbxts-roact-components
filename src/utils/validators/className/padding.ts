@@ -1,6 +1,6 @@
 import type { PaddingClassName } from "../../../types";
 
-export const paddingClassNamePattern = ["p[xy]?%-%d%d", "p[xy]?%-px"];
+export const paddingClassNamePattern = ["p[xy]?%-?%d+%.?%d*", "p[xy]?%-px"];
 
 export const validatePaddingClassName = (className: string): { apply: PaddingClassName; value: number } => {
 	const [first, second] = className.split("-");

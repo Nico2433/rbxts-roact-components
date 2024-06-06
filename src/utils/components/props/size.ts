@@ -14,6 +14,14 @@ export const getSizeValues = (className: string) => {
 		getSizeProps(validated, props);
 	}
 
+	if (typeIs(props.x, "string")) {
+		props.x = tonumber(props.x.gsub("%", "")[0]) ?? 0;
+	}
+
+	if (typeIs(props.y, "string")) {
+		props.y = tonumber(props.y.gsub("%", "")[0]) ?? 0;
+	}
+
 	const xFloat = isFloat(props.x);
 	const yFloat = isFloat(props.y);
 
@@ -21,13 +29,13 @@ export const getSizeValues = (className: string) => {
 };
 
 interface Props {
-	x: number;
-	y: number;
+	x: number | string;
+	y: number | string;
 }
 
 interface Params {
 	apply: SizeClassName;
-	value: number;
+	value: number | string;
 }
 
 const getSizeProps = ({ apply, value }: Params, props: Props) => {

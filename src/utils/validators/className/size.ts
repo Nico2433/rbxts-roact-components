@@ -26,7 +26,7 @@ export const validateSizeClassName = (className: string) => {
 		const numberB = tonumber(b);
 		if (!numberA || !numberB) throw error(`Cannot convert to number: ${className}`);
 
-		value = numberA / numberB;
+		value = `${numberA / numberB}%`;
 	} else {
 		value *= 4;
 	}
