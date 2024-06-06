@@ -6,10 +6,10 @@ interface Props {
 }
 
 const SizeConstraint: React.FC<Readonly<Props>> = ({ className = "" }) => {
-	const sizes = getMinMaxSizeValues(className);
-	if (!sizes) return;
+	const props = getMinMaxSizeValues(className);
+	if (!props) return;
 
-	return <uisizeconstraint MaxSize={sizes.max} MinSize={sizes.min} />;
+	return <uisizeconstraint {...props} />;
 };
 
 export default SizeConstraint;

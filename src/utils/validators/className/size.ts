@@ -47,10 +47,10 @@ export const validateSizeClassName = (className: string) => {
 };
 
 export const minMaxSizeClassNamePattern = [
-	"min%-w%-(%d+%.?%d*%a*)",
-	"max%-w%-(%d+%.?%d*%a*)",
-	"min%-h%-(%d+%.?%d*%a*)",
-	"max%-h%-(%d+%.?%d*%a*)",
+	"min%-w%-%d+%.?%d*%a*",
+	"max%-w%-%d+%.?%d*%a*",
+	"min%-h%-%d+%.?%d*%a*",
+	"max%-h%-%d+%.?%d*%a*",
 ];
 
 export const validateMinMaxSizeClassName = (className: string) => {
@@ -71,7 +71,7 @@ export const validateMinMaxSizeClassName = (className: string) => {
 
 	const posibleSizes = ["w", "h"];
 	const existSize = posibleSizes.includes(second);
-	if (!existClass || existSize || !value) throw error(`Invalid minMaxSize className: ${className}`);
+	if (!existClass || !existSize || !value) throw error(`Invalid minMaxSize className: ${className}`);
 
 	// *------ BASED LIKE TAILWIND
 	return { apply: first as MinMaxSizeClassName, size, value: value * 4 };

@@ -85,10 +85,7 @@ export const getMinMaxSizeValues = (className: string) => {
 	const matches: string[] = matchAllString(className, minMaxSizeClassNamePattern);
 	if (matches.isEmpty()) return;
 
-	const props: PropsMinMaxSize = {
-		min: {},
-		max: {},
-	};
+	const props: PropsMinMaxSize = {};
 
 	for (const match of matches) {
 		const validated = validateMinMaxSizeClassName(match);
@@ -96,14 +93,14 @@ export const getMinMaxSizeValues = (className: string) => {
 	}
 
 	return {
-		min: new Vector2(props.min.x, props.min.y),
-		max: new Vector2(props.max.x, props.max.y),
+		MinSize: props.min && new Vector2(props.min.x, props.min.y),
+		MaxSize: props.max && new Vector2(props.max.x, props.max.y),
 	};
 };
 
 interface PropsMinMaxSize {
-	min: Vector2Params;
-	max: Vector2Params;
+	min?: Vector2Params;
+	max?: Vector2Params;
 }
 
 interface ParamsMinMaxSize {
@@ -116,12 +113,14 @@ const getMinMaxSizeProps = ({ apply, size, value }: ParamsMinMaxSize, props: Pro
 	switch (apply) {
 		case "min":
 			{
+				props.min = {};
 				size === "w" ? (props.min.x = value) : (props.min.y = value);
 			}
 			break;
 
 		case "max":
 			{
+				props.max = {};
 				size === "w" ? (props.max.x = value) : (props.max.y = value);
 			}
 			break;
