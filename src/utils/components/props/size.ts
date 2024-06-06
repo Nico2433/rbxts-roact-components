@@ -15,11 +15,11 @@ export const getSizeValues = (className: string) => {
 	}
 
 	if (typeIs(props.x, "string")) {
-		props.x = tonumber(props.x.gsub("%", "")[0]) ?? 0;
+		props.x = tonumber(props.x.gsub("%%", "")[0]) ?? 0;
 	}
 
 	if (typeIs(props.y, "string")) {
-		props.y = tonumber(props.y.gsub("%", "")[0]) ?? 0;
+		props.y = tonumber(props.y.gsub("%%", "")[0]) ?? 0;
 	}
 
 	const xFloat = isFloat(props.x);
