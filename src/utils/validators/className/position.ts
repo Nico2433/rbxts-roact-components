@@ -41,6 +41,8 @@ export const validatePositionClassName = (className: string) => {
 		const matchedBars = second.match("/")[0];
 		if (second === "px") {
 			value = 1;
+		} else if (second === "full") {
+			value = "100%";
 		} else if (matchedBars) {
 			value = second;
 		} else {
@@ -53,7 +55,7 @@ export const validatePositionClassName = (className: string) => {
 	if (!exists || !value) throw error(`Invalid position className: ${className}`);
 
 	if (typeIs(value, "string")) {
-		if (value === "all") {
+		if (value === "100%") {
 			value = 1;
 		} else {
 			const [a, b] = value.split("/");
