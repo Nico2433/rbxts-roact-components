@@ -62,7 +62,11 @@ const getPositionProps = ({ apply, inset, value }: Params, props: Udim2Params) =
 
 		case "top":
 			{
-				isPercent ? (props.yScale = newValue) : (props.yOffset = newValue);
+				if (isPercent) {
+					newValue === 1 ? (props.yScale = 0) : (props.yScale = newValue);
+				} else {
+					props.yOffset = newValue;
+				}
 			}
 			break;
 
@@ -90,7 +94,11 @@ const getPositionProps = ({ apply, inset, value }: Params, props: Udim2Params) =
 
 		case "left":
 			{
-				isPercent ? (props.xScale = newValue) : (props.xOffset = newValue);
+				if (isPercent) {
+					newValue === 1 ? (props.xScale = 0) : (props.xScale = newValue);
+				} else {
+					props.xOffset = newValue;
+				}
 			}
 			break;
 	}
