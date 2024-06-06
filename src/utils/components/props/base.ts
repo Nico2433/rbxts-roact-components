@@ -1,7 +1,7 @@
 import type { ReactComponent } from "../../../types";
 import { getAnchorValues } from "./anchor";
 import { getPositionValues } from "./position";
-import { getSizeValues } from "./size";
+import { getAutoSizeValues, getSizeValues } from "./size";
 
 export const getBaseProps = <T extends GuiObject>({
 	forwardRef,
@@ -12,6 +12,7 @@ export const getBaseProps = <T extends GuiObject>({
 		Visible: className.match("hidden")[0] ? false : true,
 		AnchorPoint: getAnchorValues(className),
 		Size: getSizeValues(className),
+		AutomaticSize: getAutoSizeValues(className),
 		Position: getPositionValues(className),
 	};
 };

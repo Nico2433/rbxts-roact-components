@@ -62,3 +62,14 @@ const getSizeProps = ({ apply, value }: Params, props: Udim2Params) => {
 			break;
 	}
 };
+
+export const getAutoSizeValues = (className: string) => {
+	const autoSize = className.match("size%-auto")[0];
+	if (autoSize) return "XY";
+
+	const autoWidth = className.match("w%-auto")[0];
+	if (autoWidth) return "X";
+
+	const autoHeight = className.match("h%-auto")[0];
+	if (autoHeight) return "Y";
+};
