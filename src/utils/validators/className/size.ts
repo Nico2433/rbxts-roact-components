@@ -1,4 +1,5 @@
 import { SizeClassName } from "../../../types";
+import { getPercentageFromFraction } from "../../numbers";
 
 export const sizeClassNamePattern = ["w%-[%a%d/%.]+", "h%-[%a%d/%.]+", "size%-[%a%d/%.]+"];
 
@@ -10,6 +11,8 @@ export const validateSizeClassName = (className: string) => {
 
 	if (second === "px") {
 		value = 1;
+	} else if (second === "full") {
+		value = "1%";
 	} else if (matchedBars) {
 		value = second;
 	} else {
@@ -21,12 +24,10 @@ export const validateSizeClassName = (className: string) => {
 	if (!exists || !value) throw error(`Invalid size className: ${className}`);
 
 	if (typeIs(value, "string")) {
-		const [a, b] = value.split("/");
-		const numberA = tonumber(a);
-		const numberB = tonumber(b);
-		if (!numberA || !numberB) throw error(`Cannot convert to number: ${className}`);
-
-		value = `${numberA / numberB}%`;
+		if (value !== "1%") {
+			const percentage = getPercentageFromFraction(value);
+			value = `${percentage}%`;
+		}
 	} else {
 		value *= 4;
 	}

@@ -1,4 +1,5 @@
 import { PositionClassName } from "../../../types";
+import { getPercentageFromFraction } from "../../numbers";
 
 export const positionClassNamePattern = [
 	"inset%-[xy]?%-?%d+%.?%d*/*%d*",
@@ -58,12 +59,8 @@ export const validatePositionClassName = (className: string) => {
 
 	if (typeIs(value, "string")) {
 		if (value !== "1%") {
-			const [a, b] = value.split("/");
-			const numberA = tonumber(a);
-			const numberB = tonumber(b);
-			if (!numberA || !numberB) throw error(`Cannot convert to number: ${className}`);
-
-			value = `${numberA / numberB}%`;
+			const percentage = getPercentageFromFraction(value);
+			value = `${percentage}%`;
 		}
 	} else {
 		value *= 4;

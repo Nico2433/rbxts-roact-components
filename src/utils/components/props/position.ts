@@ -1,8 +1,10 @@
 import { PositionClassName, Udim2Params } from "../../../types";
+import { getPercentageNumber } from "../../numbers";
 import { matchAllString, positionClassNamePattern, validatePositionClassName } from "../../validators";
 
 export const getPositionValues = (className: string) => {
 	const matches: string[] = matchAllString(className, positionClassNamePattern);
+	if (matches.isEmpty()) return;
 
 	const props: Udim2Params = {
 		xScale: 0,
@@ -30,7 +32,7 @@ const getPositionProps = ({ apply, inset, value }: Params, props: Udim2Params) =
 	let isPercent = false;
 
 	if (typeIs(value, "string")) {
-		newValue = tonumber(value.gsub("%%", "")[0]) ?? 0;
+		newValue = getPercentageNumber(value) ?? 0;
 		isPercent = true;
 	}
 	if (!typeIs(newValue, "number")) return;

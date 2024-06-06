@@ -1,61 +1,63 @@
-import { SizeClassName } from "../../../types";
-import { isFloat } from "../../numbers";
+import { SizeClassName, Udim2Params } from "../../../types";
+import { getPercentageNumber } from "../../numbers";
 import { matchAllString, sizeClassNamePattern, validateSizeClassName } from "../../validators";
 
 export const getSizeValues = (className: string) => {
 	const matches: string[] = matchAllString(className, sizeClassNamePattern);
+	if (matches.isEmpty()) return;
 
-	const props: Props = {
-		x: 0,
-		y: 0,
+	const props: Udim2Params = {
+		xScale: 0,
+		xOffset: 0,
+		yScale: 0,
+		yOffset: 0,
 	};
+
 	for (const match of matches) {
 		const validated = validateSizeClassName(match);
 		getSizeProps(validated, props);
 	}
 
-	if (typeIs(props.x, "string")) {
-		props.x = tonumber(props.x.gsub("%%", "")[0]) ?? 0;
-	}
-
-	if (typeIs(props.y, "string")) {
-		props.y = tonumber(props.y.gsub("%%", "")[0]) ?? 0;
-	}
-
-	const xFloat = isFloat(props.x);
-	const yFloat = isFloat(props.y);
-
-	return new UDim2(xFloat ? props.x : 0, xFloat ? 0 : props.x, yFloat ? props.y : 0, yFloat ? 0 : props.y);
+	return new UDim2(props.xScale, props.xOffset, props.yScale, props.yOffset);
 };
-
-interface Props {
-	x: number | string;
-	y: number | string;
-}
 
 interface Params {
 	apply: SizeClassName;
 	value: number | string;
 }
 
-const getSizeProps = ({ apply, value }: Params, props: Props) => {
+const getSizeProps = ({ apply, value }: Params, props: Udim2Params) => {
+	let newValue = value;
+	let isPercent = false;
+
+	if (typeIs(value, "string")) {
+		newValue = getPercentageNumber(value) ?? 0;
+		isPercent = true;
+	}
+	if (!typeIs(newValue, "number")) return;
+
 	switch (apply) {
 		case "size":
 			{
-				props.x = value;
-				props.y = value;
+				if (isPercent) {
+					props.xScale = newValue;
+					props.yScale = newValue;
+				} else {
+					props.xOffset = newValue;
+					props.yOffset = newValue;
+				}
 			}
 			break;
 
 		case "w":
 			{
-				props.x = value;
+				isPercent ? (props.xScale = newValue) : (props.xOffset = newValue);
 			}
 			break;
 
 		case "h":
 			{
-				props.y = value;
+				isPercent ? (props.yScale = newValue) : (props.yOffset = newValue);
 			}
 			break;
 	}

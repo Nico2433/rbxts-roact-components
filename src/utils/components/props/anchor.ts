@@ -1,13 +1,12 @@
-import { AnchorClassName } from "../../../types";
+import { AnchorClassName, Vector2Params } from "../../../types";
 import { anchorClassNamePattern, matchAllString, validateAnchorClassName } from "../../validators";
 
 export const getAnchorValues = (className: string) => {
 	const matches = matchAllString(className, anchorClassNamePattern);
+	if (matches.isEmpty()) return;
 
-	const props: Props = {
-		x: undefined,
-		y: undefined,
-	};
+	const props: Vector2Params = {};
+
 	for (const match of matches) {
 		const validated = validateAnchorClassName(match);
 		getAnchorProps(validated, props);
@@ -16,17 +15,12 @@ export const getAnchorValues = (className: string) => {
 	return new Vector2(props.x, props.y);
 };
 
-interface Props {
-	x?: number;
-	y?: number;
-}
-
 interface Params {
 	apply: AnchorClassName;
 	value: number;
 }
 
-const getAnchorProps = ({ apply, value }: Params, props: Props) => {
+const getAnchorProps = ({ apply, value }: Params, props: Vector2Params) => {
 	switch (apply) {
 		case "a":
 			{
