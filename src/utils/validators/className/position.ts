@@ -25,13 +25,15 @@ export const validatePositionClassName = (className: string) => {
 	const [first, second, third] = className.split("-");
 
 	let value;
-	let inset;
+	let inset: "x" | "y" | undefined;
 
 	if (third) {
 		second === "x" ? (inset = "x") : (inset = "y");
 		const matchedBars = third.match("/")[0];
 		if (third === "px") {
 			value = 1;
+		} else if (third === "full") {
+			value = "1%";
 		} else if (matchedBars) {
 			value = third;
 		} else {
@@ -42,7 +44,7 @@ export const validatePositionClassName = (className: string) => {
 		if (second === "px") {
 			value = 1;
 		} else if (second === "full") {
-			value = "100%";
+			value = "1%";
 		} else if (matchedBars) {
 			value = second;
 		} else {
@@ -55,9 +57,7 @@ export const validatePositionClassName = (className: string) => {
 	if (!exists || !value) throw error(`Invalid position className: ${className}`);
 
 	if (typeIs(value, "string")) {
-		if (value === "100%") {
-			value = 1;
-		} else {
+		if (value !== "1%") {
 			const [a, b] = value.split("/");
 			const numberA = tonumber(a);
 			const numberB = tonumber(b);
@@ -70,5 +70,5 @@ export const validatePositionClassName = (className: string) => {
 	}
 
 	// *------ BASED LIKE TAILWIND
-	return { apply: first as PositionClassName, inset: inset as "x" | "y" | undefined, value };
+	return { apply: first as PositionClassName, inset, value };
 };

@@ -1,37 +1,23 @@
-import { PositionClassName } from "../../../types";
-import { isFloat } from "../../numbers";
+import { PositionClassName, Udim2Params } from "../../../types";
 import { matchAllString, positionClassNamePattern, validatePositionClassName } from "../../validators";
 
 export const getPositionValues = (className: string) => {
 	const matches: string[] = matchAllString(className, positionClassNamePattern);
 
-	const props: Props = {
-		x: 0,
-		y: 0,
+	const props: Udim2Params = {
+		xScale: 0,
+		xOffset: 0,
+		yScale: 0,
+		yOffset: 0,
 	};
+
 	for (const match of matches) {
 		const validated = validatePositionClassName(match);
 		getPositionProps(validated, props);
 	}
 
-	if (typeIs(props.x, "string")) {
-		props.x = tonumber(props.x.gsub("%%", "")[0]) ?? 0;
-	}
-
-	if (typeIs(props.y, "string")) {
-		props.y = tonumber(props.y.gsub("%%", "")[0]) ?? 0;
-	}
-
-	const xFloat = isFloat(props.x) && props.x < 1;
-	const yFloat = isFloat(props.y) && props.x < 1;
-
-	return new UDim2(xFloat ? props.x : 0, xFloat ? 0 : props.x, yFloat ? props.y : 0, yFloat ? 0 : props.y);
+	return new UDim2(props.xScale, props.xOffset, props.yScale, props.yOffset);
 };
-
-interface Props {
-	x: number | string;
-	y: number | string;
-}
 
 interface Params {
 	apply: PositionClassName;
@@ -39,7 +25,7 @@ interface Params {
 	value: number | string;
 }
 
-const getPositionProps = ({ apply, inset, value }: Params, props: Props) => {
+const getPositionProps = ({ apply, inset, value }: Params, props: Udim2Params) => {
 	let newValue = value;
 	let isPercent = false;
 
@@ -47,56 +33,62 @@ const getPositionProps = ({ apply, inset, value }: Params, props: Props) => {
 		newValue = tonumber(value.gsub("%%", "")[0]) ?? 0;
 		isPercent = true;
 	}
+	if (!typeIs(newValue, "number")) return;
 
 	switch (apply) {
 		case "inset":
 			{
 				if (inset) {
-					inset === "x" ? (props.x = newValue) : (props.y = newValue);
+					inset === "x"
+						? isPercent
+							? (props.xScale = newValue)
+							: (props.xOffset = newValue)
+						: isPercent
+							? (props.yScale = newValue)
+							: (props.yOffset = newValue);
 				} else {
-					props.x = newValue;
-					props.y = newValue;
+					if (isPercent) {
+						props.xScale = newValue;
+						props.yScale = newValue;
+					} else {
+						props.xOffset = newValue;
+						props.yOffset = newValue;
+					}
 				}
 			}
 			break;
 
 		case "top":
 			{
-				if (newValue === 1) {
-					props.y = 0;
-				} else {
-					isPercent ? (props.y = `${newValue}%`) : (props.y = newValue);
-				}
+				isPercent ? (props.yScale = newValue) : (props.yOffset = newValue);
 			}
 			break;
 
 		case "right":
 			{
-				if (typeIs(newValue, "number") && newValue !== 1) {
-					isPercent ? (props.x = `${1 - newValue}%`) : (props.x = 1 - newValue);
+				if (isPercent) {
+					newValue === 1 ? (props.xScale = 1) : (props.xScale = 1 - newValue);
 				} else {
-					props.x = newValue;
+					props.xScale = 1;
+					props.xOffset = newValue * -1;
 				}
 			}
 			break;
 
 		case "bottom":
 			{
-				if (typeIs(newValue, "number") && newValue !== 1) {
-					isPercent ? (props.y = `${1 - newValue}%`) : (props.y = 1 - newValue);
+				if (isPercent) {
+					newValue === 1 ? (props.yScale = 1) : (props.yScale = 1 - newValue);
 				} else {
-					props.y = newValue;
+					props.yScale = 1;
+					props.yOffset = newValue * -1;
 				}
 			}
 			break;
 
 		case "left":
 			{
-				if (newValue === 1) {
-					props.y = 0;
-				} else {
-					isPercent ? (props.y = `${newValue}%`) : (props.y = newValue);
-				}
+				isPercent ? (props.xScale = newValue) : (props.xOffset = newValue);
 			}
 			break;
 	}
