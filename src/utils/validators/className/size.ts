@@ -1,7 +1,17 @@
 import { SizeClassName } from "../../../types";
 import { getPercentageFromFraction } from "../../numbers";
 
-export const sizeClassNamePattern = ["w%-[%a%d/%.]+", "h%-[%a%d/%.]+", "size%-[%a%d/%.]+"];
+export const sizeClassNamePattern = [
+	"w%-%d+%.?%d*/?%d*",
+	"w%-full",
+	"w%-px",
+	"h%-%d+%.?%d*/?%d*",
+	"h%-full",
+	"h%-px",
+	"size%-%d+%.?%d*/?%d*",
+	"size%-full",
+	"size%-px",
+];
 
 export const validateSizeClassName = (className: string) => {
 	const [first, second] = className.split("-");
