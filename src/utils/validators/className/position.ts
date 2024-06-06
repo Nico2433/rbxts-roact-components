@@ -1,7 +1,7 @@
 import { PositionClassName } from "../../../types";
 
 export const positionClassNamePattern = [
-	"inset%-[xy]?%-(%d+%.?%d*/?%d*)",
+	"inset%-[xy]?%-?%d+%.?%d*/*%d*",
 	"inset%-[xy]?%-px",
 	"top%-%d+",
 	"top%-%d+/%d+",

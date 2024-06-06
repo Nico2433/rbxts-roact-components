@@ -22,8 +22,8 @@ export const getPositionValues = (className: string) => {
 		props.y = tonumber(props.y.gsub("%%", "")[0]) ?? 0;
 	}
 
-	const xFloat = isFloat(props.x);
-	const yFloat = isFloat(props.y);
+	const xFloat = isFloat(props.x) && props.x < 1;
+	const yFloat = isFloat(props.y) && props.x < 1;
 
 	return new UDim2(xFloat ? props.x : 0, xFloat ? 0 : props.x, yFloat ? props.y : 0, yFloat ? 0 : props.y);
 };
