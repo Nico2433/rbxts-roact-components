@@ -23,6 +23,8 @@ interface Params {
 }
 
 const getRoundedProps = ({ value }: Params, props: UdimParams) => {
+	let finalValue = 0;
+
 	switch (value) {
 		case "none":
 			{
@@ -33,37 +35,37 @@ const getRoundedProps = ({ value }: Params, props: UdimParams) => {
 
 		case "sm":
 			{
-				props.offset = 0.25;
+				finalValue = 0.25;
 			}
 			break;
 
 		case "md":
 			{
-				props.offset = 1.5;
+				finalValue = 1.5;
 			}
 			break;
 
 		case "lg":
 			{
-				props.offset = 2;
+				finalValue = 2;
 			}
 			break;
 
 		case "xl":
 			{
-				props.offset = 3;
+				finalValue = 3;
 			}
 			break;
 
 		case "2xl":
 			{
-				props.offset = 4;
+				finalValue = 4;
 			}
 			break;
 
 		case "3xl":
 			{
-				props.offset = 6;
+				finalValue = 6;
 			}
 			break;
 
@@ -75,8 +77,9 @@ const getRoundedProps = ({ value }: Params, props: UdimParams) => {
 
 		default:
 			{
-				props.offset = 1;
+				finalValue = 1;
 			}
 			break;
 	}
+	props.offset = finalValue * 4;
 };
