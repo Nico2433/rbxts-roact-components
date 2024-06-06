@@ -24,7 +24,7 @@ export const cycleStringMatch = (match: IterableFunction<LuaTuple<(string | numb
 	let stop = 0;
 	while (stop === 0) {
 		const value = match()[0];
-		if (value && typeIs(value, "string")) {
+		if (typeIs(value, "string")) {
 			matches.push(value);
 		} else {
 			stop = 1;
