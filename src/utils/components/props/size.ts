@@ -1,6 +1,12 @@
-import { SizeClassName, Udim2Params } from "../../../types";
+import { MinMaxSizeClassName, SizeClassName, Udim2Params, Vector2Params } from "../../../types";
 import { getPercentageNumber } from "../../numbers";
-import { matchAllString, sizeClassNamePattern, validateSizeClassName } from "../../validators";
+import {
+	matchAllString,
+	minMaxSizeClassNamePattern,
+	sizeClassNamePattern,
+	validateMinMaxSizeClassName,
+	validateSizeClassName,
+} from "../../validators";
 
 export const getSizeValues = (className: string) => {
 	const matches: string[] = matchAllString(className, sizeClassNamePattern);
@@ -14,6 +20,7 @@ export const getSizeValues = (className: string) => {
 	};
 
 	for (const match of matches) {
+		if (match.match("min")[0] || match.match("max")[0]) continue;
 		const validated = validateSizeClassName(match);
 		getSizeProps(validated, props);
 	}
@@ -21,12 +28,12 @@ export const getSizeValues = (className: string) => {
 	return new UDim2(props.xScale, props.xOffset, props.yScale, props.yOffset);
 };
 
-interface Params {
+interface ParamsSize {
 	apply: SizeClassName;
 	value: number | string;
 }
 
-const getSizeProps = ({ apply, value }: Params, props: Udim2Params) => {
+const getSizeProps = ({ apply, value }: ParamsSize, props: Udim2Params) => {
 	let newValue = value;
 	let isPercent = false;
 
@@ -72,4 +79,51 @@ export const getAutoSizeValues = (className: string) => {
 
 	const autoHeight = className.match("h%-auto")[0];
 	if (autoHeight) return "Y";
+};
+
+export const getMinMaxSizeValues = (className: string) => {
+	const matches: string[] = matchAllString(className, minMaxSizeClassNamePattern);
+	if (matches.isEmpty()) return;
+
+	const props: PropsMinMaxSize = {
+		min: {},
+		max: {},
+	};
+
+	for (const match of matches) {
+		const validated = validateMinMaxSizeClassName(match);
+		getMinMaxSizeProps(validated, props);
+	}
+
+	return {
+		min: new Vector2(props.min.x, props.min.y),
+		max: new Vector2(props.max.x, props.max.y),
+	};
+};
+
+interface PropsMinMaxSize {
+	min: Vector2Params;
+	max: Vector2Params;
+}
+
+interface ParamsMinMaxSize {
+	apply: MinMaxSizeClassName;
+	size: "w" | "h";
+	value: number;
+}
+
+const getMinMaxSizeProps = ({ apply, size, value }: ParamsMinMaxSize, props: PropsMinMaxSize) => {
+	switch (apply) {
+		case "min":
+			{
+				size === "w" ? (props.min.x = value) : (props.min.y = value);
+			}
+			break;
+
+		case "max":
+			{
+				size === "w" ? (props.max.x = value) : (props.max.y = value);
+			}
+			break;
+	}
 };

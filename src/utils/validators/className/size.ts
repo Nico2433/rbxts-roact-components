@@ -1,4 +1,4 @@
-import { SizeClassName } from "../../../types";
+import { MinMaxSizeClassName, SizeClassName } from "../../../types";
 import { getPercentageFromFraction } from "../../numbers";
 
 export const sizeClassNamePattern = [
@@ -44,4 +44,30 @@ export const validateSizeClassName = (className: string) => {
 
 	// *------ BASED LIKE TAILWIND
 	return { apply: first as SizeClassName, value };
+};
+
+export const minMaxSizeClassNamePattern = ["min%-w%-.+", "max%-w%-.+", "min%-h%-.+", "max%-h%-.+"];
+
+export const validateMinMaxSizeClassName = (className: string) => {
+	const [first, second, third] = className.split("-");
+
+	let value;
+	let size: "w" | "h";
+
+	second === "w" ? (size = "w") : (size = "h");
+	if (third === "px") {
+		value = 1;
+	} else {
+		value = tonumber(third);
+	}
+
+	const possibleClasses = ["min", "max"];
+	const existClass = possibleClasses.includes(first);
+
+	const posibleSizes = ["w", "h"];
+	const existSize = posibleSizes.includes(second);
+	if (!existClass || existSize || !value) throw error(`Invalid minMaxSize className: ${className}`);
+
+	// *------ BASED LIKE TAILWIND
+	return { apply: first as MinMaxSizeClassName, size, value: value * 4 };
 };

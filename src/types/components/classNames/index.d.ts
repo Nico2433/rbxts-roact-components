@@ -4,6 +4,8 @@ export type AnchorClassName = "a" | "ax" | "ay";
 
 export type SizeClassName = "w" | "h" | "size";
 
+export type MinMaxSizeClassName = "min" | "max";
+
 export type PositionClassName = "inset" | "top" | "right" | "bottom" | "left";
 
 export type RoundedValues = "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "full";

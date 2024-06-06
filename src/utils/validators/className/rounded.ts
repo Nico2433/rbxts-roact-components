@@ -7,11 +7,11 @@ export const validateRoundedClassName = (className: string) => {
 	const value = second;
 
 	const possibleClasses = ["rounded"];
-	const possibleValues = ["none", "sm", "md", "lg", "xl", "2xl", "3xl", "full"];
 	const exists = possibleClasses.includes(first);
 	if (!exists) throw error(`Invalid rounded className: ${className}`);
 
 	if (value) {
+		const possibleValues = ["none", "sm", "md", "lg", "xl", "2xl", "3xl", "full"];
 		const exists = possibleValues.includes(second);
 		if (!exists) throw error(`Invalid rounded className: ${className}`);
 	}
