@@ -1,7 +1,7 @@
 import type { AnchorClassName } from "../../../types";
 import { bracketsPattern } from "../../string";
 
-export const anchorClassNamePattern = "a[xy]?%-[-]?%[%-?%d?%d?%d%]";
+export const anchorClassNamePattern = "a[xy]?%-%[%d?%d?%d%]";
 
 export const validateAnchorClassName = (className: string) => {
 	const [first, second] = className.split("-");
