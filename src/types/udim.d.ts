@@ -4,3 +4,8 @@ export interface Udim2Params {
 	yScale: number;
 	yOffset: number;
 }
+
+export interface UdimParams {
+	scale?: number;
+	offset?: number;
+}

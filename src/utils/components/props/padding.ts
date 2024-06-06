@@ -1,6 +1,21 @@
 import { PaddingClassName } from "../../../types/components/classNames";
+import { matchAllString, paddingClassNamePattern, validatePaddingClassName } from "../../validators";
 
 type Props = Partial<Pick<UIPadding, "PaddingTop" | "PaddingRight" | "PaddingBottom" | "PaddingLeft">>;
+
+export const getPaddingValues = (className: string) => {
+	const matches: string[] = matchAllString(className, paddingClassNamePattern);
+	if (matches.isEmpty()) return;
+
+	const props: Props = {};
+
+	for (const match of matches) {
+		const validated = validatePaddingClassName(match);
+		getPaddingProps(validated, props);
+	}
+
+	return props;
+};
 
 interface Params {
 	apply: PaddingClassName;

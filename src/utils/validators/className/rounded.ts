@@ -1,0 +1,20 @@
+import { RoundedValues } from "../../../types";
+
+export const roundedClassNamePattern = "rounded%-?%d?%a*";
+
+export const validateRoundedClassName = (className: string) => {
+	const [first, second] = className.split("-");
+	const value = second;
+
+	const possibleClasses = ["rounded"];
+	const possibleValues = ["none", "sm", "md", "lg", "xl", "2xl", "3xl", "full"];
+	const exists = possibleClasses.includes(first);
+	if (!exists) throw error(`Invalid position className: ${className}`);
+
+	if (value) {
+		const exists = possibleValues.includes(first);
+		if (!exists) throw error(`Invalid position className: ${className}`);
+	}
+
+	return { value: value as RoundedValues | undefined };
+};
