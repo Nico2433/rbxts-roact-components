@@ -113,14 +113,14 @@ const getMinMaxSizeProps = ({ apply, size, value }: ParamsMinMaxSize, props: Pro
 	switch (apply) {
 		case "min":
 			{
-				props.min = {};
+				if (!props.min) props.min = {};
 				size === "w" ? (props.min.x = value) : (props.min.y = value);
 			}
 			break;
 
 		case "max":
 			{
-				props.max = {};
+				if (!props.max) props.max = {};
 				size === "w" ? (props.max.x = value) : (props.max.y = value);
 			}
 			break;
