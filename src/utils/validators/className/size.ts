@@ -46,7 +46,12 @@ export const validateSizeClassName = (className: string) => {
 	return { apply: first as SizeClassName, value };
 };
 
-export const minMaxSizeClassNamePattern = ["min%-w%-.+", "max%-w%-.+", "min%-h%-.+", "max%-h%-.+"];
+export const minMaxSizeClassNamePattern = [
+	"min%-w%-(%d+%.?%d*%a*)",
+	"max%-w%-(%d+%.?%d*%a*)",
+	"min%-h%-(%d+%.?%d*%a*)",
+	"max%-h%-(%d+%.?%d*%a*)",
+];
 
 export const validateMinMaxSizeClassName = (className: string) => {
 	const [first, second, third] = className.split("-");
