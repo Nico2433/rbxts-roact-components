@@ -1,3 +1,5 @@
+// *-------------- MATCH ALL --------------* //
+
 export const matchAllString = (text: string, patterns: string | string[]) => {
 	if (typeIs(patterns, "string")) {
 		const match = text.gmatch(patterns);
@@ -18,7 +20,7 @@ export const matchAllString = (text: string, patterns: string | string[]) => {
 	}
 };
 
-export const cycleStringMatch = (match: IterableFunction<LuaTuple<(string | number)[]>>) => {
+const cycleStringMatch = (match: IterableFunction<LuaTuple<(string | number)[]>>) => {
 	const matches: string[] = [];
 
 	let stop = 0;
@@ -32,4 +34,18 @@ export const cycleStringMatch = (match: IterableFunction<LuaTuple<(string | numb
 	}
 
 	return matches;
+};
+
+// *-------------- MATCH ONE --------------* //
+
+export const matchString = (text: string, patterns: string | string[]) => {
+	if (typeIs(patterns, "string")) {
+		const match = text.match(patterns)[0];
+		if (typeIs(match, "string")) return match;
+	} else {
+		for (const pattern of patterns) {
+			const match = text.match(pattern)[0];
+			if (typeIs(match, "string")) return match;
+		}
+	}
 };

@@ -6,7 +6,7 @@ export const getPercentageFromFraction = (text: string) => {
 	const [a, b] = text.split("/");
 	const numberA = tonumber(a);
 	const numberB = tonumber(b);
-	if (!numberA || !numberB) throw error(`Cannot convert to number: ${string}`);
+	if (!numberA || !numberB) throw error(`Cannot convert to number: ${text}`);
 
 	return numberA / numberB;
 };

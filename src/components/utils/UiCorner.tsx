@@ -1,12 +1,12 @@
 import React from "react";
-import { getRoundedValues } from "../../utils";
+import { getBorderRadiusValues } from "../../utils";
 
 interface Props {
 	className?: string;
 }
 
 const Rounded: React.FC<Readonly<Props>> = ({ className = "" }) => {
-	const radius = getRoundedValues(className);
+	const radius = getBorderRadiusValues(className);
 	if (!radius) return;
 
 	return <uicorner CornerRadius={radius} />;

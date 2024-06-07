@@ -1,7 +1,5 @@
-import type { ReactComponent } from "../../../types";
-import { getAnchorValues } from "./anchor";
-import { getPositionValues } from "./position";
-import { getAutoSizeValues, getSizeValues } from "./size";
+import type { ReactComponent } from "../../types";
+import { getAnchorValues, getAutoSizeValues, getPositionValues, getSizeValues } from "../className";
 
 export const getBaseProps = <T extends GuiObject>({
 	forwardRef,

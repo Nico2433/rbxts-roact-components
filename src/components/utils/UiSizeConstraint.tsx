@@ -1,12 +1,12 @@
 import React from "react";
-import { getMinMaxSizeValues } from "../../utils";
+import { getSizeConstraintValues } from "../../utils";
 
 interface Props {
 	className?: string;
 }
 
 const SizeConstraint: React.FC<Readonly<Props>> = ({ className = "" }) => {
-	const props = getMinMaxSizeValues(className);
+	const props = getSizeConstraintValues(className);
 	if (!props) return;
 
 	return <uisizeconstraint {...props} />;

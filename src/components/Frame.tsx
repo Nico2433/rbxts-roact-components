@@ -1,7 +1,7 @@
 import React from "react";
 import type { ReactFrame } from "../types/components";
 import { getBaseProps } from "../utils";
-import { Padding, Rounded, SizeConstraint } from "./utils";
+import { UiCorner, UiPadding, UiSizeConstraint } from "./utils";
 
 const Frame: React.FC<Readonly<ReactFrame>> = (props) => {
 	const baseProps = getBaseProps<Frame>(props);
@@ -9,9 +9,9 @@ const Frame: React.FC<Readonly<ReactFrame>> = (props) => {
 	return (
 		<frame {...baseProps}>
 			{props.children}
-			<Padding className={props.className} />
-			<Rounded className={props.className} />
-			<SizeConstraint className={props.className} />
+			<UiPadding className={props.className} />
+			<UiCorner className={props.className} />
+			<UiSizeConstraint className={props.className} />
 		</frame>
 	);
 };

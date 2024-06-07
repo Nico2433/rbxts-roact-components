@@ -1,3 +1,3 @@
-export { default as Padding } from "./Padding";
-export { default as Rounded } from "./Rounded";
-export { default as SizeConstraint } from "./SizeConstraint";
+export { default as UiCorner } from "./UiCorner";
+export { default as UiPadding } from "./UiPadding";
+export { default as UiSizeConstraint } from "./UiSizeConstraint";
