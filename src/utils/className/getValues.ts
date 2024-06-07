@@ -49,7 +49,7 @@ export function getClassNameValues<T extends string, K extends string | undefine
 
 	if (finalValue) {
 		const matchedBrackets = finalValue.match(bracketsPattern)[0];
-		if (matchedBrackets) finalValue = optValue.gsub(bracketsPattern, "")[0];
+		if (matchedBrackets) finalValue = finalValue.gsub(bracketsPattern, "")[0];
 		const matchedBars = finalValue.match("/")[0];
 
 		if (finalValue === "px") {
