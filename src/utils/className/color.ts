@@ -8,25 +8,29 @@ export const getBgColorValues = (className: string) => {
 	const matches = getClassName(className, bgColorClassNamePattern, opacityClassNamePattern);
 	if (matches.isEmpty()) return;
 
-	let color: string | undefined = undefined;
+	const props: Props = {};
 
 	matches.forEach((match) => {
 		const validated = getClassNameValues(match, {
 			prefixes: colorsPrefixes,
 		});
-		getBgColorProps(validated, color);
+		getBgColorProps(validated, props);
 	});
 
 	return {
-		BackgroundColor3: color && Color3.fromHex(color),
+		BackgroundColor3: props.color && Color3.fromHex(props.color),
 	};
 };
 
-const getBgColorProps = (value: ClassNameValues, color: string | undefined) =>
+interface Props {
+	color?: string;
+}
+
+const getBgColorProps = (value: ClassNameValues, props: Props) =>
 	getClassNameProps(
 		value,
 		({ value }) => {
-			color = value;
+			props.color = value;
 		},
 		true,
 	);
