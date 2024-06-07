@@ -1,6 +1,6 @@
 {
 	"name": "@nico2433/rbxts-react-utils",
-	"version": "1.0.33",
+	"version": "1.0.34",
 	"description": "Utils for rbxts-react",
 	"main": "out/init.lua",
 	"scripts": {
