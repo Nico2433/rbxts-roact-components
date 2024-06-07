@@ -3,7 +3,7 @@ import { getClassName } from "./getClassName";
 import { getClassNameProps } from "./getProps";
 import { ClassNameValues, getClassNameValues } from "./getValues";
 
-const roundedClassNamePattern = "^rounded%-";
+const roundedClassNamePattern = "^rounded%-?";
 
 export const getBorderRadiusValues = (className: string) => {
 	const matches = getClassName(className, roundedClassNamePattern);
