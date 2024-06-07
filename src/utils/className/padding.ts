@@ -1,5 +1,5 @@
-import { getClassName } from ".";
 import { PaddingClassName } from "../../types";
+import { getClassName } from "./getClassName";
 import { getClassNameProps } from "./getProps";
 import { ClassNameValues, getClassNameValues } from "./getValues";
 

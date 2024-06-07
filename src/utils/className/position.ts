@@ -1,5 +1,5 @@
-import { getClassName } from ".";
 import { PositionClassName, PositionValues, Udim2Params } from "../../types";
+import { getClassName } from "./getClassName";
 import { getClassNameProps } from "./getProps";
 import { ClassNameValues, getClassNameValues } from "./getValues";
 

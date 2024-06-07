@@ -1,6 +1,6 @@
-import { getClassName } from ".";
 import { SizeClassName, SizeConstraintClassName, SizeConstraintValues, Udim2Params, Vector2Params } from "../../types";
 import { matchString } from "../string";
+import { getClassName } from "./getClassName";
 import { getClassNameProps } from "./getProps";
 import { ClassNameValues, getClassNameValues } from "./getValues";
 
