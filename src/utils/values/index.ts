@@ -10,8 +10,19 @@ export interface ClassNamePrefix {
 export const matchClassNamePrefix = (prefix: string, values: ClassNamePrefix, secondPrefix?: string) => {
 	let value = values[prefix];
 
-	if (secondPrefix && typeIs(value, "table")) {
-		value = value[secondPrefix];
+	if (secondPrefix) {
+		if (values[secondPrefix]) {
+			value = values[secondPrefix];
+		}
+
+		if (typeIs(value, "table")) {
+			const numeric = tonumber(secondPrefix);
+			if (numeric && value[numeric]) {
+				value = value[numeric];
+			} else {
+				value = value[secondPrefix];
+			}
+		}
 	}
 
 	if (typeIs(value, "string") || typeIs(value, "number")) return value;

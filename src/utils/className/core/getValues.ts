@@ -44,13 +44,8 @@ export function getClassNameValues<T extends string, K extends string | undefine
 		const matchedBars = finalValue.match("/")[0];
 
 		if (prefixes) {
-			const exists1 = matchClassNamePrefix(finalValue, prefixes);
-			if (exists1) {
-				numericValue = exists1;
-			} else {
-				const exists2 = matchClassNamePrefix(value, prefixes, finalValue);
-				if (exists2) numericValue = exists2;
-			}
+			const exists = matchClassNamePrefix(value, prefixes, finalValue);
+			if (exists) numericValue = exists;
 		}
 
 		if (numericValue === defaultValue) {
