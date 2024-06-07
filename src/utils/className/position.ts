@@ -29,7 +29,7 @@ const getPositionProps = (values: ClassNameValues<PositionClassName, PositionVal
 		switch (pos1) {
 			case "inset":
 				{
-					if (pos2) {
+					if (pos2 === "x" || pos2 === "y") {
 						pos2 === "x"
 							? isPercent
 								? (props.xScale = value)
