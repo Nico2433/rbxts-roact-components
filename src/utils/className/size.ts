@@ -1,6 +1,6 @@
 import { SizeClassName, SizeConstraintClassName, SizeConstraintValues, Udim2Params, Vector2Params } from "../../types";
 import { matchString } from "../string";
-import { maxW } from "../values";
+import { maxSize } from "../values";
 import { ClassNameValues, getClassName, getClassNameValues } from "./core";
 import { getClassNameProps } from "./core/getProps";
 
@@ -83,7 +83,9 @@ export const getSizeConstraintValues = (className: string) => {
 	const props: SizeConstraintProps = {};
 
 	matches.forEach((match) => {
-		const validated = getClassNameValues<SizeConstraintClassName, SizeConstraintValues>(match, { prefixes: maxW });
+		const validated = getClassNameValues<SizeConstraintClassName, SizeConstraintValues>(match, {
+			prefixes: maxSize,
+		});
 		getSizeConstraintProps(validated, props);
 	});
 
@@ -114,7 +116,7 @@ const getSizeConstraintProps = (
 			case "max":
 				{
 					if (!props.max) props.max = {};
-					pos2 === "h" ? (props.max.x = value) : (props.max.y = value);
+					pos2 === "w" ? (props.max.x = value) : (props.max.y = value);
 				}
 				break;
 		}

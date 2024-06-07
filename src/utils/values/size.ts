@@ -1,4 +1,4 @@
-export const maxW = {
+export const maxSize = {
 	none: 0,
 	xs: 80,
 	sm: 96,

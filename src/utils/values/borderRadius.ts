@@ -1,4 +1,5 @@
 export const borderRadius = {
+	default: 1,
 	sm: 0.25,
 	md: 1.5,
 	lg: 2,

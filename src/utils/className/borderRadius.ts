@@ -17,7 +17,7 @@ export const getBorderRadiusValues = (className: string) => {
 	matches.forEach((match) => {
 		const validated = getClassNameValues<BorderRadiusClassName, BorderRadiusValues | undefined>(match, {
 			prefixes: borderRadius,
-			defaultValue: 1,
+			defaultValue: borderRadius.default,
 		});
 		getBorderRadiusProps(validated, props);
 	});
