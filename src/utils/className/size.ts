@@ -1,8 +1,7 @@
 import { SizeClassName, SizeConstraintClassName, SizeConstraintValues, Udim2Params, Vector2Params } from "../../types";
 import { matchString } from "../string";
-import { getClassName } from "./getClassName";
-import { getClassNameProps } from "./getProps";
-import { ClassNameValues, getClassNameValues } from "./getValues";
+import { ClassNameValues, getClassName, getClassNameValues } from "./core";
+import { getClassNameProps } from "./core/getProps";
 
 const sizePatterns = ["^size%-", "^[wh]%-"];
 
@@ -22,7 +21,9 @@ export const getSizeValues = (className: string) => {
 		getSizeProps(validated, props);
 	});
 
-	return new UDim2(props.xScale, props.xOffset, props.yScale, props.yOffset);
+	return {
+		Size: new UDim2(props.xScale, props.xOffset, props.yScale, props.yOffset),
+	};
 };
 
 const getSizeProps = (values: ClassNameValues<SizeClassName>, props: Udim2Params) =>
@@ -67,7 +68,9 @@ export const getAutoSizeValues = (className: string) => {
 		if (matchString(match, "h")) return (value = "Y");
 	});
 
-	return value;
+	return {
+		AutomaticSize: value,
+	};
 };
 
 const sizeConstraintPatterns = ["^min%-[wh]", "^max%-[wh]"];

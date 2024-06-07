@@ -1,7 +1,6 @@
 import { BorderRadiusClassName, BorderRadiusValues, UdimParams } from "../../types";
-import { getClassName } from "./getClassName";
-import { getClassNameProps } from "./getProps";
-import { ClassNameValues, getClassNameValues } from "./getValues";
+import { ClassNameValues, getClassName, getClassNameValues } from "./core";
+import { getClassNameProps } from "./core/getProps";
 
 const roundedClassNamePattern = "^rounded%-?";
 

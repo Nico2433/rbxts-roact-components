@@ -1,9 +1,8 @@
 import { PaddingClassName } from "../../types";
-import { getClassName } from "./getClassName";
-import { getClassNameProps } from "./getProps";
-import { ClassNameValues, getClassNameValues } from "./getValues";
+import { ClassNameValues, getClassName, getClassNameValues } from "./core";
+import { getClassNameProps } from "./core/getProps";
 
-export const paddingClassNamePattern = "^p[xy]?%-";
+const paddingClassNamePattern = "^p[xy]?%-";
 
 type Props = Partial<Pick<UIPadding, "PaddingTop" | "PaddingRight" | "PaddingBottom" | "PaddingLeft">>;
 

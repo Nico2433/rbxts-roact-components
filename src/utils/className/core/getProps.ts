@@ -1,4 +1,4 @@
-import { getPercentageNumber } from "../numbers";
+import { getPercentageNumber } from "../../numbers";
 import { ClassNameValues } from "./getValues";
 
 type CallbackFC<T extends string, K extends string | undefined, C extends string | number> = (

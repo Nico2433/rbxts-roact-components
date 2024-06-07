@@ -1,9 +1,8 @@
 import { AnchorClassName, Vector2Params } from "../../types";
-import { getClassName } from "./getClassName";
-import { getClassNameProps } from "./getProps";
-import { ClassNameValues, getClassNameValues } from "./getValues";
+import { ClassNameValues, getClassName, getClassNameValues } from "./core";
+import { getClassNameProps } from "./core/getProps";
 
-export const anchorClassNamePattern = "^a[xy]?%-";
+const anchorClassNamePattern = "^a[xy]?%-";
 
 export const getAnchorValues = (className: string) => {
 	const matches = getClassName(className, anchorClassNamePattern);
@@ -19,7 +18,9 @@ export const getAnchorValues = (className: string) => {
 		getAnchorProps(validated, props);
 	});
 
-	return new Vector2(props.x, props.y);
+	return {
+		AnchorPoint: new Vector2(props.x, props.y),
+	};
 };
 
 const getAnchorProps = (values: ClassNameValues<AnchorClassName>, props: Vector2Params) =>

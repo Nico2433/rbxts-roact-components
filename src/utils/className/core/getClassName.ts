@@ -1,4 +1,4 @@
-import { matchString } from "../string";
+import { matchString } from "../../string";
 
 export const getClassName = (className: string, patterns: string | string[], excludePatterns?: string | string[]) => {
 	const parts = className.split(" ");

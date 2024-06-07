@@ -1,5 +1,5 @@
-import { getPercentageFromFraction } from "../numbers";
-import { bracketsPattern } from "../string";
+import { getPercentageFromFraction } from "../../numbers";
+import { bracketsPattern } from "../../string";
 
 export interface ClassNameValues<
 	T extends string,

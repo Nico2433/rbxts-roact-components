@@ -12,3 +12,5 @@ export type PositionValues = "x" | "y" | undefined;
 
 export type BorderRadiusClassName = "rounded";
 export type BorderRadiusValues = "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "full";
+
+export type OpacityClassName = "opacity";

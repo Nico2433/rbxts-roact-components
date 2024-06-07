@@ -1,7 +1,6 @@
 import { PositionClassName, PositionValues, Udim2Params } from "../../types";
-import { getClassName } from "./getClassName";
-import { getClassNameProps } from "./getProps";
-import { ClassNameValues, getClassNameValues } from "./getValues";
+import { ClassNameValues, getClassName, getClassNameValues } from "./core";
+import { getClassNameProps } from "./core/getProps";
 
 const positionClassNamePattern = ["^inset%-", "^top%-", "^right%-", "^bottom%-", "^left%-"];
 
@@ -21,7 +20,9 @@ export const getPositionValues = (className: string) => {
 		getPositionProps(validated, props);
 	});
 
-	return new UDim2(props.xScale, props.xOffset, props.yScale, props.yOffset);
+	return {
+		Position: new UDim2(props.xScale, props.xOffset, props.yScale, props.yOffset),
+	};
 };
 
 const getPositionProps = (values: ClassNameValues<PositionClassName, PositionValues>, props: Udim2Params) =>
