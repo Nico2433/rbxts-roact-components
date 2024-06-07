@@ -89,9 +89,10 @@ export const getSizeConstraintValues = (className: string) => {
 		getSizeConstraintProps(validated, props);
 	});
 
+	const inf = math.huge;
 	return {
-		MinSize: props.min && new Vector2(props.min.x, props.min.y),
-		MaxSize: props.max && new Vector2(props.max.x, props.max.y),
+		MinSize: props.min && new Vector2(props.min.x ?? inf, props.min.y ?? inf),
+		MaxSize: props.max && new Vector2(props.max.x ?? inf, props.max.y ?? inf),
 	};
 };
 
