@@ -83,7 +83,7 @@ export const getSizeConstraintValues = (className: string) => {
 	const props: SizeConstraintProps = {};
 
 	matches.forEach((match) => {
-		const validated = getClassNameValues<SizeConstraintClassName, SizeConstraintValues>(match, maxW);
+		const validated = getClassNameValues<SizeConstraintClassName, SizeConstraintValues>(match, { prefixes: maxW });
 		getSizeConstraintProps(validated, props);
 	});
 

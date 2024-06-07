@@ -15,10 +15,10 @@ export const getBorderRadiusValues = (className: string) => {
 	};
 
 	matches.forEach((match) => {
-		const validated = getClassNameValues<BorderRadiusClassName, BorderRadiusValues | undefined>(
-			match,
-			borderRadius,
-		);
+		const validated = getClassNameValues<BorderRadiusClassName, BorderRadiusValues | undefined>(match, {
+			prefixes: borderRadius,
+			defaultValue: 1,
+		});
 		getBorderRadiusProps(validated, props);
 	});
 
@@ -30,10 +30,6 @@ const getBorderRadiusProps = (
 	props: UdimParams,
 ) =>
 	getClassNameProps(values, ({ value }, isPercent) => {
-		if (value !== 0) {
-			if (value === 1 && isPercent) return (props.scale = value);
-			props.offset = value;
-		} else {
-			props.offset = 1;
-		}
+		if (value === 1 && isPercent) return (props.scale = value);
+		props.offset = value;
 	});

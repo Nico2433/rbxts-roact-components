@@ -17,44 +17,38 @@ interface Calculate {
 	value: number;
 }
 
+interface OptParams {
+	prefixes?: ClassNamePrefix;
+	calculate?: Calculate;
+	defaultValue?: number;
+}
+
 export function getClassNameValues<
 	T extends string = string,
 	K extends string | undefined = string,
 	C extends string | number = string | number,
->(className: string, prefixes?: ClassNamePrefix, calculate?: Calculate): ClassNameValues<T, K, C>;
-
-export function getClassNameValues<T extends string, K extends string | undefined, C extends string | number>(
-	className: string,
-	prefixes?: ClassNamePrefix,
-	calculate?: Calculate,
-): ClassNameValues<T, K, C>;
+>(className: string, optParams?: OptParams): ClassNameValues<T, K, C>;
 
 export function getClassNameValues<T extends string, K extends string | undefined>(
 	className: string,
-	prefixes?: ClassNamePrefix,
-	calculate?: Calculate,
-): ClassNameValues<T, K, number>;
-
-export function getClassNameValues<T extends string, K extends string | undefined, C extends string | number>(
-	className: string,
-	prefixes?: ClassNamePrefix,
-	calculate: Calculate = {
-		method: "*",
-		value: 4,
-	},
+	{ prefixes, calculate, defaultValue = 0 }: OptParams = {},
 ) {
 	const [key, value, optValue] = className.split("-");
 
 	let finalValue = optValue ? optValue : value;
-	let numericValue;
+	let numericValue: string | number = defaultValue;
 
 	if (finalValue) {
 		const matchedBrackets = finalValue.match(bracketsPattern)[0];
 		if (matchedBrackets) finalValue = finalValue.gsub(bracketsPattern, "")[0];
 		const matchedBars = finalValue.match("/")[0];
 
-		if (prefixes) numericValue = matchClassNamePrefix(finalValue, prefixes);
-		if (!numericValue) {
+		if (prefixes) {
+			const exists = matchClassNamePrefix(finalValue, prefixes);
+			if (exists) numericValue = exists;
+		}
+
+		if (numericValue === defaultValue) {
 			if (finalValue === "px") {
 				numericValue = 1;
 			} else if (finalValue === "full") {
@@ -63,16 +57,21 @@ export function getClassNameValues<T extends string, K extends string | undefine
 				const percentage = getPercentageFromFraction(finalValue);
 				numericValue = `${percentage}%`;
 			} else {
-				numericValue = tonumber(finalValue);
+				const exists = tonumber(finalValue);
+				if (exists) numericValue = exists;
 			}
 		}
 
 		// *----------- ONLY APPLY TO PIXELS
 		if (typeIs(numericValue, "number")) {
-			const { method, value } = calculate;
-			if (method && value) method === "*" ? (numericValue *= value) : (numericValue /= value);
+			if (calculate) {
+				const { method, value } = calculate;
+				method === "*" ? (numericValue *= value) : (numericValue /= value);
+			} else {
+				numericValue *= 4;
+			}
 		}
 	}
 
-	return { pos1: key as T, pos2: value as K, value: (numericValue ?? 0) as C };
+	return { pos1: key as T, pos2: value as K, value: numericValue };
 }
