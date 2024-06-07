@@ -61,15 +61,15 @@ export function getClassNameValues<T extends string, K extends string | undefine
 				if (exists) numericValue = exists;
 			}
 		}
+	}
 
-		// *----------- ONLY APPLY TO PIXELS
-		if (typeIs(numericValue, "number")) {
-			if (calculate) {
-				const { method, value } = calculate;
-				method === "*" ? (numericValue *= value) : (numericValue /= value);
-			} else {
-				numericValue *= 4;
-			}
+	// *----------- ONLY APPLY TO PIXELS
+	if (typeIs(numericValue, "number")) {
+		if (calculate) {
+			const { method, value } = calculate;
+			method === "*" ? (numericValue *= value) : (numericValue /= value);
+		} else {
+			numericValue *= 4;
 		}
 	}
 
