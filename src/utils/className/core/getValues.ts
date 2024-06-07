@@ -1,5 +1,6 @@
 import { getPercentageFromFraction } from "../../numbers";
 import { bracketsPattern } from "../../string";
+import { ClassNamePrefix, matchClassNamePrefix } from "../../values";
 
 export interface ClassNameValues<
 	T extends string,
@@ -20,23 +21,23 @@ export function getClassNameValues<
 	T extends string = string,
 	K extends string | undefined = string,
 	C extends string | number = string | number,
->(className: string, parsePercentage?: boolean, calculate?: Calculate): ClassNameValues<T, K, C>;
+>(className: string, prefixes?: ClassNamePrefix, calculate?: Calculate): ClassNameValues<T, K, C>;
 
 export function getClassNameValues<T extends string, K extends string | undefined, C extends string | number>(
 	className: string,
-	parsePercentage: true,
+	prefixes?: ClassNamePrefix,
 	calculate?: Calculate,
 ): ClassNameValues<T, K, C>;
 
 export function getClassNameValues<T extends string, K extends string | undefined>(
 	className: string,
-	parsePercentage: false,
+	prefixes?: ClassNamePrefix,
 	calculate?: Calculate,
 ): ClassNameValues<T, K, number>;
 
 export function getClassNameValues<T extends string, K extends string | undefined, C extends string | number>(
 	className: string,
-	parsePercentage: boolean = true,
+	prefixes?: ClassNamePrefix,
 	calculate: Calculate = {
 		method: "*",
 		value: 4,
@@ -52,17 +53,18 @@ export function getClassNameValues<T extends string, K extends string | undefine
 		if (matchedBrackets) finalValue = finalValue.gsub(bracketsPattern, "")[0];
 		const matchedBars = finalValue.match("/")[0];
 
-		if (finalValue === "px") {
-			numericValue = 1;
-		} else if (parsePercentage && (matchedBars || finalValue === "full")) {
-			if (finalValue === "full") {
+		if (prefixes) numericValue = matchClassNamePrefix(finalValue, prefixes);
+		if (!numericValue) {
+			if (finalValue === "px") {
+				numericValue = 1;
+			} else if (finalValue === "full") {
 				numericValue = "1%";
-			} else {
+			} else if (matchedBars) {
 				const percentage = getPercentageFromFraction(finalValue);
 				numericValue = `${percentage}%`;
+			} else {
+				numericValue = tonumber(finalValue);
 			}
-		} else {
-			numericValue = tonumber(finalValue);
 		}
 
 		// *----------- ONLY APPLY TO PIXELS

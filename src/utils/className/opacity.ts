@@ -10,7 +10,7 @@ export const getBgOpacityValues = (className: string) => {
 	const props: Props = {};
 
 	matches.forEach((match) => {
-		const validated = getClassNameValues<OpacityClassName | "bg">(match, true, {
+		const validated = getClassNameValues<OpacityClassName | "bg">(match, undefined, {
 			method: "/",
 			value: 100,
 		});

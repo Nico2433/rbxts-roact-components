@@ -1,5 +1,6 @@
 import { SizeClassName, SizeConstraintClassName, SizeConstraintValues, Udim2Params, Vector2Params } from "../../types";
 import { matchString } from "../string";
+import { maxW } from "../values";
 import { ClassNameValues, getClassName, getClassNameValues } from "./core";
 import { getClassNameProps } from "./core/getProps";
 
@@ -27,7 +28,7 @@ export const getSizeValues = (className: string) => {
 };
 
 const getSizeProps = (values: ClassNameValues<SizeClassName>, props: Udim2Params) =>
-	getClassNameProps(values, ({ pos1, value }, isPercent) => {
+	getClassNameProps(values, ({ pos1, pos2, value }, isPercent) => {
 		switch (pos1) {
 			case "size":
 				{
@@ -82,7 +83,7 @@ export const getSizeConstraintValues = (className: string) => {
 	const props: SizeConstraintProps = {};
 
 	matches.forEach((match) => {
-		const validated = getClassNameValues<SizeConstraintClassName, SizeConstraintValues>(match, false);
+		const validated = getClassNameValues<SizeConstraintClassName, SizeConstraintValues>(match, maxW);
 		getSizeConstraintProps(validated, props);
 	});
 
