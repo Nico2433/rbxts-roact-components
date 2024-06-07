@@ -1,3 +1,4 @@
+import { colorsPrefixes } from "../values";
 import { ClassNameValues, getClassName, getClassNameProps, getClassNameValues } from "./core";
 import { opacityClassNamePattern } from "./opacity";
 
@@ -7,10 +8,12 @@ export const getBgColorValues = (className: string) => {
 	const matches = getClassName(className, bgColorClassNamePattern, opacityClassNamePattern);
 	if (matches.isEmpty()) return;
 
-	let color: string | undefined;
+	let color: string | undefined = undefined;
 
 	matches.forEach((match) => {
-		const validated = getClassNameValues(match);
+		const validated = getClassNameValues(match, {
+			prefixes: colorsPrefixes,
+		});
 		getBgColorProps(validated, color);
 	});
 
