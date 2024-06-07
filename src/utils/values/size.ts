@@ -1,4 +1,4 @@
-export const maxSize = {
+export const maxSizePrefixes = {
 	none: 0,
 	xs: 80,
 	sm: 96,

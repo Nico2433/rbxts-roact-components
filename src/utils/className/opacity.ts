@@ -1,10 +1,10 @@
 import { OpacityClassName } from "../../types";
 import { ClassNameValues, getClassName, getClassNameProps, getClassNameValues } from "./core";
 
-const bgOpacityClassNamePattern = ["^opacity%-", "^bg%-opacity%-"];
+export const opacityClassNamePattern = ["^opacity%-", "^bg%-opacity%-"];
 
-export const getBgOpacityValues = (className: string) => {
-	const matches = getClassName(className, bgOpacityClassNamePattern);
+export const getOpacityValues = (className: string) => {
+	const matches = getClassName(className, opacityClassNamePattern);
 	if (matches.isEmpty()) return;
 
 	const props: Props = {};

@@ -3,7 +3,7 @@ import { bracketsPattern } from "../../string";
 import { ClassNamePrefix, matchClassNamePrefix } from "../../values";
 
 export interface ClassNameValues<
-	T extends string,
+	T extends string = string,
 	K extends string | undefined = string,
 	C extends string | number = string | number,
 > {
@@ -44,8 +44,13 @@ export function getClassNameValues<T extends string, K extends string | undefine
 		const matchedBars = finalValue.match("/")[0];
 
 		if (prefixes) {
-			const exists = matchClassNamePrefix(finalValue, prefixes);
-			if (exists) numericValue = exists;
+			if (optValue) {
+				const exists = matchClassNamePrefix(value, prefixes, optValue);
+				if (exists) numericValue = exists;
+			} else {
+				const exists = matchClassNamePrefix(finalValue, prefixes);
+				if (exists) numericValue = exists;
+			}
 		}
 
 		if (numericValue === defaultValue) {

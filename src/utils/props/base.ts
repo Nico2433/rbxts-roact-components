@@ -1,5 +1,12 @@
 import type { ReactComponent } from "../../types";
-import { getAnchorValues, getAutoSizeValues, getBgOpacityValues, getPositionValues, getSizeValues } from "../className";
+import {
+	getAnchorValues,
+	getAutoSizeValues,
+	getBgColorValues,
+	getOpacityValues,
+	getPositionValues,
+	getSizeValues,
+} from "../className";
 
 export const getBaseProps = <T extends GuiObject>({
 	forwardRef,
@@ -15,10 +22,11 @@ export const getBaseProps = <T extends GuiObject>({
 			}),
 		},
 		Visible: className.match("hidden")[0] ? false : true,
-		...getAnchorValues(className),
-		...getSizeValues(className),
-		...getAutoSizeValues(className),
-		...getPositionValues(className),
-		...getBgOpacityValues(className),
+		...getAnchorValues(className), // *----- AnchorPoint
+		...getSizeValues(className), // *----- Size
+		...getAutoSizeValues(className), // *----- AutomaticSize
+		...getPositionValues(className), // *----- Position
+		...getOpacityValues(className), // *----- Transparency | BackgroundTransparency
+		...getBgColorValues(className), // *----- BackgroundColor3
 	};
 };

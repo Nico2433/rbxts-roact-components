@@ -1,5 +1,5 @@
 import { BorderRadiusClassName, BorderRadiusValues, UdimParams } from "../../types";
-import { borderRadius } from "../values";
+import { borderRadiusPrefixes } from "../values";
 import { ClassNameValues, getClassName, getClassNameValues } from "./core";
 import { getClassNameProps } from "./core/getProps";
 
@@ -16,8 +16,8 @@ export const getBorderRadiusValues = (className: string) => {
 
 	matches.forEach((match) => {
 		const validated = getClassNameValues<BorderRadiusClassName, BorderRadiusValues | undefined>(match, {
-			prefixes: borderRadius,
-			defaultValue: borderRadius.default,
+			prefixes: borderRadiusPrefixes,
+			defaultValue: borderRadiusPrefixes.default,
 		});
 		getBorderRadiusProps(validated, props);
 	});

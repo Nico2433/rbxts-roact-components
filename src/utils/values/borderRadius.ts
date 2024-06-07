@@ -1,4 +1,4 @@
-export const borderRadius = {
+export const borderRadiusPrefixes = {
 	default: 1,
 	sm: 0.25,
 	md: 1.5,
