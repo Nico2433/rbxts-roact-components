@@ -12,7 +12,10 @@ export const getAnchorValues = (className: string) => {
 	const props: Vector2Params = {};
 
 	matches.forEach((match) => {
-		const validated = getClassNameValues<AnchorClassName>(match);
+		const validated = getClassNameValues<AnchorClassName>(match, true, {
+			method: "/",
+			value: 100,
+		});
 		getAnchorProps(validated, props);
 	});
 
