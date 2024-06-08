@@ -8,7 +8,7 @@ export const getTextProps = <T extends GuiObject>({
 }: ReactTextComponent<T>): Partial<React.InstanceProps<T> | { [key: string]: unknown }> => {
 	return {
 		Text: text,
-		TextScaled: matchString(className, "text-auto") ? true : false,
+		TextScaled: matchString(className, "text%-auto") ? true : false,
 		...getTextSizeValues(className), // *----- TextSize
 		...getTextColorValues(className), // *----- TextColor3
 		...getAlignTextValues(className), // *----- TextXAlignment
