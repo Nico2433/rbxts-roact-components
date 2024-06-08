@@ -17,6 +17,7 @@ This package adds custom components that have compatibility with TailwindCSS cla
 ## Currently Support (WIP)
 
 - `Frame`
+- `TextLabel`
 
 ## Supported Classes
 
@@ -40,6 +41,8 @@ This package adds custom components that have compatibility with TailwindCSS cla
 ### Color
 
 - Supports all Tailwind base colors.
+- `bg`: background
+- `text`: text
 
 ### Opacity
 
@@ -72,18 +75,46 @@ This package adds custom components that have compatibility with TailwindCSS cla
 - `w`: width
 - `h`: height
 
-### SizeConstraint (does not work based on parent)
+### Size Constraint (does not work based on parent)
 
 - `min-w`: minimum width
 - `min-h`: minimum height
 - `max-w`: maximum width
 - `max-h`: maximum height
 
-### AutomaticSize
+### Automatic Size
 
 - `size-auto`: sets both width and height
 - `w-auto`: width
 - `h-auto`: height
+
+### Visibility
+
+- `hidden`
+
+### Text Scale
+
+- `text-auto`
+
+### Text Size
+
+- `text-xs`
+- `text-lg`
+- `text-xl`
+- `text-2xl`
+- `text-3xl`
+- `text-4xl`
+- `text-4xl`
+- `text-6xl`
+- `text-7xl`
+- `text-8xl`
+- `text-9xl`
+
+### Text Align
+
+- `text-left`
+- `text-center`
+- `text-right`
 
 ## Usage
 
