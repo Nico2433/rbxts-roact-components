@@ -1,5 +1,5 @@
 import { matchString } from "../string";
-import { colorsPrefixes } from "../values";
+import { colorsPrefixes, textSizePrefixes } from "../values";
 import { ClassNameValues, getClassName, getClassNameProps, getClassNameValues } from "./core";
 
 const textSizePattern = "^text%-[xlsmg%d]+$";
@@ -11,7 +11,7 @@ export const getTextSizeValues = (className: string) => {
 	const props: SizeProps = {};
 
 	matches.forEach((match) => {
-		const validated = getClassNameValues<string>(match);
+		const validated = getClassNameValues<string>(match, { prefixes: textSizePrefixes });
 		getTextSizeProps(validated, props);
 	});
 
