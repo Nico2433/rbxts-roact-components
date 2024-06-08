@@ -18,19 +18,19 @@ export const getBgColorValues = (className: string) => {
 	});
 
 	return {
-		BackgroundColor3: props.color && Color3.fromHex(props.color),
+		BackgroundColor3: props.value && Color3.fromHex(props.value),
 	};
 };
 
 interface Props {
-	color?: string;
+	value?: string;
 }
 
 const getBgColorProps = (value: ClassNameValues, props: Props) =>
 	getClassNameProps(
 		value,
 		({ value }) => {
-			props.color = value;
+			props.value = value;
 		},
 		true,
 	);

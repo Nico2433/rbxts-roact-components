@@ -18,7 +18,7 @@ export const getClassName = (className: string, patterns: string | string[], exc
 				if (match) matches.push(match);
 			}
 		} else {
-			let match: string | undefined;
+			let match: string | undefined = undefined;
 
 			patterns.forEach((pattern) => {
 				if (part.match(pattern)[0]) match = part;

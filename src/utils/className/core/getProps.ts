@@ -28,7 +28,7 @@ export function getClassNameProps<T extends string, K extends string | undefined
 	if (expectString) {
 		if (!typeIs(newValue, "string")) return;
 	} else {
-		// *----------- PARSES STRINGS LIKE 1%
+		// *----------- PARSES PERCENTAGE STRINGS
 		if (typeIs(value, "string")) {
 			const percentage = getPercentageNumber(value);
 			if (percentage) {

@@ -11,14 +11,16 @@ export const matchClassNamePrefix = (prefix: string, values: ClassNamePrefix, se
 	let value = values[prefix];
 
 	if (secondPrefix) {
-		if (values[secondPrefix]) {
-			value = values[secondPrefix];
+		const existsSecond = values[secondPrefix];
+		if (existsSecond) {
+			value = existsSecond;
 		}
 
 		if (typeIs(value, "table")) {
 			const numeric = tonumber(secondPrefix);
-			if (numeric && value[numeric]) {
-				value = value[numeric];
+			if (numeric) {
+				const existsNumeric = value[numeric];
+				if (existsNumeric) value = existsNumeric;
 			} else {
 				value = value[secondPrefix];
 			}
@@ -31,3 +33,4 @@ export const matchClassNamePrefix = (prefix: string, values: ClassNamePrefix, se
 export * from "./borderRadius";
 export * from "./colors";
 export * from "./size";
+export * from "./text";

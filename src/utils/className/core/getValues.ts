@@ -33,10 +33,10 @@ export function getClassNameValues<T extends string, K extends string | undefine
 	className: string,
 	{ prefixes, calculate, defaultValue = 0 }: OptParams = {},
 ) {
-	const [key, value, optValue] = className.split("-");
+	const [key, secondKey, thirdKey] = className.split("-");
 
-	let finalValue = optValue ? optValue : value;
-	let numericValue: string | number = defaultValue;
+	let finalValue = thirdKey ? thirdKey : secondKey;
+	let value: string | number = defaultValue;
 
 	if (finalValue) {
 		const matchedBrackets = finalValue.match(bracketsPattern)[0];
@@ -44,34 +44,35 @@ export function getClassNameValues<T extends string, K extends string | undefine
 		const matchedBars = finalValue.match("/")[0];
 
 		if (prefixes) {
-			const exists = matchClassNamePrefix(value, prefixes, finalValue);
-			if (exists) numericValue = exists;
+			const exists = matchClassNamePrefix(secondKey, prefixes, finalValue);
+			if (exists) value = exists;
 		}
 
-		if (numericValue === defaultValue) {
+		// *----------- PERCENTAGE WILL BE NUMERIC STRING WITH % AT END
+		if (value === defaultValue) {
 			if (finalValue === "px") {
-				numericValue = 1;
+				value = 1;
 			} else if (finalValue === "full") {
-				numericValue = "1%";
+				value = "1%";
 			} else if (matchedBars) {
 				const percentage = getPercentageFromFraction(finalValue);
-				numericValue = `${percentage}%`;
+				value = `${percentage}%`;
 			} else {
 				const exists = tonumber(finalValue);
-				if (exists) numericValue = exists;
+				if (exists) value = exists;
 			}
 		}
 	}
 
 	// *----------- ONLY APPLY TO PIXELS
-	if (typeIs(numericValue, "number")) {
+	if (typeIs(value, "number")) {
 		if (calculate) {
-			const { method, value } = calculate;
-			method === "*" ? (numericValue *= value) : (numericValue /= value);
+			const { method, value: calcValue } = calculate;
+			method === "*" ? (value *= calcValue) : (value /= calcValue);
 		} else {
-			numericValue *= 4;
+			value *= 4;
 		}
 	}
 
-	return { pos1: key as T, pos2: value as K, value: numericValue };
+	return { pos1: key as T, pos2: secondKey as K, value };
 }

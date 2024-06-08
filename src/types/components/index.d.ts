@@ -10,5 +10,10 @@ export interface ReactComponent<T extends GuiObject | Instance = GuiObject> {
 	onHover?: (isHovering: boolean, rbx: T, x: number, y: number) => void;
 }
 
+export interface ReactTextComponent<T extends GuiObject = GuiObject> extends ReactComponent<T> {
+	text?: string;
+}
+
 export * from "./className";
 export * from "./frame";
+export * from "./labels";
