@@ -17,7 +17,13 @@ This package adds custom components that have compatibility with TailwindCSS cla
 ## Currently Support (WIP)
 
 - `Frame`
+- `ImageButton`
+- `ImageLabel`
+- `ScrollingFrame`
+- `TextBox`
+- `TextButton`
 - `TextLabel`
+- `VideoFrame`
 
 ## Supported Classes
 

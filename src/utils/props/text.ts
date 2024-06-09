@@ -1,10 +1,7 @@
 import { ReactTextComponent } from "../../types";
 import { getAlignTextValues, getTextColorValues, getTextOpacityValues, getTextSizeValues } from "../className";
 
-export const getTextProps = <T extends GuiObject>({
-	text,
-	className = "",
-}: ReactTextComponent<T>): Partial<React.InstanceProps<T> | { [key: string]: unknown }> => {
+export const getTextProps = <T extends GuiObject>({ text, className = "" }: ReactTextComponent<T>) => {
 	return {
 		Text: text,
 		TextScaled: className.match("text%-auto")[0] ? true : false,

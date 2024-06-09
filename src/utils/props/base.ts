@@ -8,11 +8,7 @@ import {
 	getSizeValues,
 } from "../className";
 
-export const getBaseProps = <T extends GuiObject>({
-	forwardRef,
-	className = "",
-	onHover,
-}: ReactComponent<T>): Partial<React.InstanceProps<T> | { [key: string]: unknown }> => {
+export const getBaseProps = <T extends GuiObject>({ forwardRef, className = "", onHover }: ReactComponent<T>) => {
 	return {
 		ref: forwardRef,
 		Event: {
