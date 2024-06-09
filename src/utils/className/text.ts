@@ -1,5 +1,4 @@
-import { matchString } from "../string";
-import { colorsPrefixes, textSizePrefixes } from "../values";
+import { textSizePrefixes } from "../values";
 import { ClassNameValues, getClassName, getClassNameProps, getClassNameValues } from "./core";
 
 const textSizePattern = "^text%-[xlsmg%d]+$";
@@ -29,37 +28,6 @@ const getTextSizeProps = (values: ClassNameValues<string>, props: SizeProps) =>
 		props.value = value;
 	});
 
-const textColorPattern = ["^text%-%a+%-", "^text%-black", "^text%-white"];
-
-export const getTextColorValues = (className: string) => {
-	const matches = getClassName(className, textColorPattern);
-	if (matches.isEmpty()) return;
-
-	const props: ColorProps = {};
-
-	matches.forEach((match) => {
-		const validated = getClassNameValues<string>(match, { prefixes: colorsPrefixes });
-		getTextColorProps(validated, props);
-	});
-
-	return {
-		TextColor3: props.value && Color3.fromHex(props.value),
-	};
-};
-
-interface ColorProps {
-	value?: string;
-}
-
-const getTextColorProps = (values: ClassNameValues, props: ColorProps) =>
-	getClassNameProps(
-		values,
-		({ value }) => {
-			props.value = value;
-		},
-		true,
-	);
-
 const textAlignPattern = ["^text%-left", "^text%-center", "^text%-right"];
 
 export const getAlignTextValues = (className: string) => {
@@ -68,9 +36,9 @@ export const getAlignTextValues = (className: string) => {
 
 	let value: "Left" | "Center" | "Right" | undefined;
 	matches.forEach((match) => {
-		if (matchString(match, "left")) return (value = "Left");
-		if (matchString(match, "center")) return (value = "Center");
-		if (matchString(match, "right")) return (value = "Right");
+		if (match.match("left")[0]) return (value = "Left");
+		if (match.match("center")[0]) return (value = "Center");
+		if (match.match("right")[0]) return (value = "Right");
 	});
 
 	return {

@@ -40,3 +40,30 @@ const getOpacityProps = (values: ClassNameValues<OpacityClassName | "bg">, props
 				break;
 		}
 	});
+
+const textOpacityClassNamePattern = "^text%-opacity%-";
+
+export const getTextOpacityValues = (className: string) => {
+	const matches = getClassName(className, textOpacityClassNamePattern);
+	if (matches.isEmpty()) return;
+
+	const props: TextProps = {};
+
+	matches.forEach((match) => {
+		const validated = getClassNameValues(match, {
+			calculate: { method: "/", value: 100 },
+		});
+		getTextOpacityProps(validated, props);
+	});
+
+	return props;
+};
+
+interface TextProps {
+	TextTransparency?: number;
+}
+
+const getTextOpacityProps = (values: ClassNameValues, props: TextProps) =>
+	getClassNameProps(values, ({ value }) => {
+		props.TextTransparency = value;
+	});

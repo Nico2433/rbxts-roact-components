@@ -1,5 +1,4 @@
 import { SizeClassName, SizeConstraintClassName, SizeConstraintValues, Udim2Params, Vector2Params } from "../../types";
-import { matchString } from "../string";
 import { maxSizePrefixes } from "../values";
 import { ClassNameValues, getClassName, getClassNameValues } from "./core";
 import { getClassNameProps } from "./core/getProps";
@@ -64,9 +63,9 @@ export const getAutoSizeValues = (className: string) => {
 
 	let value: "XY" | "X" | "Y" | undefined;
 	matches.forEach((match) => {
-		if (matchString(match, "size")) return (value = "XY");
-		if (matchString(match, "w")) return (value = "X");
-		if (matchString(match, "h")) return (value = "Y");
+		if (match.match("size")[0]) return (value = "XY");
+		if (match.match("w")[0]) return (value = "X");
+		if (match.match("h")[0]) return (value = "Y");
 	});
 
 	return {

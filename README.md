@@ -44,10 +44,11 @@ This package adds custom components that have compatibility with TailwindCSS cla
 - `bg`: background
 - `text`: text
 
-### Opacity
+### Opacity (percentage-based)
 
 - `opacity`
 - `bg-opacity`
+- `text-opacity`
 
 ### Padding
 

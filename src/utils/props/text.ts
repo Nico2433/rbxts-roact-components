@@ -1,6 +1,5 @@
 import { ReactTextComponent } from "../../types";
-import { getAlignTextValues, getTextColorValues, getTextSizeValues } from "../className";
-import { matchString } from "../string";
+import { getAlignTextValues, getTextColorValues, getTextOpacityValues, getTextSizeValues } from "../className";
 
 export const getTextProps = <T extends GuiObject>({
 	text,
@@ -8,9 +7,10 @@ export const getTextProps = <T extends GuiObject>({
 }: ReactTextComponent<T>): Partial<React.InstanceProps<T> | { [key: string]: unknown }> => {
 	return {
 		Text: text,
-		TextScaled: matchString(className, "text%-auto") ? true : false,
+		TextScaled: className.match("text%-auto")[0] ? true : false,
 		...getTextSizeValues(className), // *----- TextSize
 		...getTextColorValues(className), // *----- TextColor3
 		...getAlignTextValues(className), // *----- TextXAlignment
+		...getTextOpacityValues(className), // *----- TextTransparency
 	};
 };

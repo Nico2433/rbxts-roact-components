@@ -7,7 +7,6 @@ import {
 	getPositionValues,
 	getSizeValues,
 } from "../className";
-import { matchString } from "../string";
 
 export const getBaseProps = <T extends GuiObject>({
 	forwardRef,
@@ -22,7 +21,7 @@ export const getBaseProps = <T extends GuiObject>({
 				MouseLeave: (rbx: T, x: number, y: number) => onHover(false, rbx, x, y),
 			}),
 		},
-		Visible: matchString(className, "hidden") ? false : true,
+		Visible: className.match("hidden")[0] ? false : true,
 		...getAnchorValues(className), // *----- AnchorPoint
 		...getSizeValues(className), // *----- Size
 		...getAutoSizeValues(className), // *----- AutomaticSize
