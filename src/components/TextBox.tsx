@@ -4,10 +4,6 @@ import { getBaseProps, getInputProps, getTextProps } from "../utils";
 import { UiCorner, UiPadding, UiSizeConstraint } from "./utils";
 
 const TextBox: React.FC<Readonly<ReactInput<TextBox>>> = (props) => {
-	const baseProps = getBaseProps<TextBox>(props);
-	const textProps = getTextProps<TextBox>(props);
-	const inputProps = getInputProps<TextBox>(props);
-
 	const inputRef = props.forwardRef ?? useRef<TextBox | undefined>(undefined);
 	const onChange = props.onChange;
 
@@ -20,6 +16,10 @@ const TextBox: React.FC<Readonly<ReactInput<TextBox>>> = (props) => {
 				});
 		}, []);
 	}
+
+	const baseProps = getBaseProps<TextBox>(props, inputRef);
+	const textProps = getTextProps<TextBox>(props);
+	const inputProps = getInputProps<TextBox>(props);
 
 	return (
 		<textbox {...baseProps} {...textProps} {...inputProps}>

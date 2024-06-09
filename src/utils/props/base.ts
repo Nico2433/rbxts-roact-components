@@ -8,9 +8,12 @@ import {
 	getSizeValues,
 } from "../className";
 
-export const getBaseProps = <T extends GuiObject>({ forwardRef, className = "", onHover }: ReactComponent<T>) => {
+export const getBaseProps = <T extends GuiObject>(
+	{ forwardRef, className = "", onHover }: ReactComponent<T>,
+	ref?: React.RefObject<T>,
+) => {
 	return {
-		ref: forwardRef,
+		ref: ref ? ref : forwardRef,
 		Event: {
 			...(onHover && {
 				MouseEnter: (rbx: T, x: number, y: number) => onHover(true, rbx, x, y),
