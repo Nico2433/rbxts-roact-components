@@ -14,7 +14,7 @@ npm i @rbxts/react-utils@npm:@nico2433/rbxts-react-utils
 
 This package adds custom components that have compatibility with TailwindCSS classes for Roblox UI components. All classes based on pixels will have their passed value multiplied by 4. For example, `p-4` will be 16px, just like in Tailwind. Classes should accept custom parameters with or without brackets.
 
-## Currently Support (WIP)
+## Currently Support
 
 - `Frame`
 - `ImageButton`
@@ -24,6 +24,7 @@ This package adds custom components that have compatibility with TailwindCSS cla
 - `TextButton`
 - `TextLabel`
 - `VideoFrame`
+- `ViewPortFrame`
 
 ## Supported Classes
 
