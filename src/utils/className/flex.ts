@@ -20,7 +20,7 @@ interface Props {
 }
 
 const getFlexProps = (match: string, props: Props) => {
-	const isCol = match.match("column")[0];
+	const isCol = match.match("col")[0];
 
 	if (isCol) {
 		props.FillDirection = "Vertical";
