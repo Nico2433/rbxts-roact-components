@@ -27,37 +27,33 @@ const getDisplayPositionProps = (
 	props: PositionProps,
 	flex?: "Horizontal" | "Vertical",
 ) =>
-	getClassNameProps(
-		values,
-		({ pos1, pos2 }) => {
-			if (flex) {
-				const isRow = flex === "Horizontal";
+	getClassNameProps(values, ({ pos1, pos2 }) => {
+		if (flex) {
+			const isRow = flex === "Horizontal";
 
-				if (pos1 === "items") {
-					if (isRow) {
-						if (pos2 === "start") props.VerticalAlignment = "Top";
-						if (pos2 === "center") props.VerticalAlignment = "Center";
-						if (pos2 === "end") props.VerticalAlignment = "Bottom";
-					} else {
-						if (pos2 === "start") props.HorizontalAlignment = "Left";
-						if (pos2 === "center") props.HorizontalAlignment = "Center";
-						if (pos2 === "end") props.HorizontalAlignment = "Right";
-					}
+			if (pos1 === "items") {
+				if (isRow) {
+					if (pos2 === "start") props.VerticalAlignment = "Top";
+					if (pos2 === "center") props.VerticalAlignment = "Center";
+					if (pos2 === "end") props.VerticalAlignment = "Bottom";
 				} else {
-					if (isRow) {
-						if (pos2 === "start") props.HorizontalAlignment = "Left";
-						if (pos2 === "center") props.HorizontalAlignment = "Center";
-						if (pos2 === "end") props.HorizontalAlignment = "Right";
-					} else {
-						if (pos2 === "start") props.VerticalAlignment = "Top";
-						if (pos2 === "center") props.VerticalAlignment = "Center";
-						if (pos2 === "end") props.VerticalAlignment = "Bottom";
-					}
+					if (pos2 === "start") props.HorizontalAlignment = "Left";
+					if (pos2 === "center") props.HorizontalAlignment = "Center";
+					if (pos2 === "end") props.HorizontalAlignment = "Right";
+				}
+			} else {
+				if (isRow) {
+					if (pos2 === "start") props.HorizontalAlignment = "Left";
+					if (pos2 === "center") props.HorizontalAlignment = "Center";
+					if (pos2 === "end") props.HorizontalAlignment = "Right";
+				} else {
+					if (pos2 === "start") props.VerticalAlignment = "Top";
+					if (pos2 === "center") props.VerticalAlignment = "Center";
+					if (pos2 === "end") props.VerticalAlignment = "Bottom";
 				}
 			}
-		},
-		true,
-	);
+		}
+	});
 
 const gapPattern = "^gap%-";
 
