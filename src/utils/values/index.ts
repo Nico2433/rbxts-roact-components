@@ -30,7 +30,7 @@ export const matchClassNamePrefix = (prefix: string, values: ClassNamePrefix, se
 	if (typeIs(value, "string") || typeIs(value, "number")) return value;
 };
 
-export * from "./borderRadius";
+export * from "./border";
 export * from "./colors";
 export * from "./size";
 export * from "./text";

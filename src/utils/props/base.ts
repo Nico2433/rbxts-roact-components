@@ -3,9 +3,12 @@ import {
 	getAnchorValues,
 	getAutoSizeValues,
 	getBgColorValues,
+	getBorderColorValues,
+	getBorderWidthValues,
 	getOpacityValues,
 	getPositionValues,
 	getSizeValues,
+	getZIndexValues,
 } from "../className";
 
 export const getBaseProps = <T extends GuiObject>(
@@ -27,5 +30,8 @@ export const getBaseProps = <T extends GuiObject>(
 		...getPositionValues(className), // *----- Position
 		...getOpacityValues(className), // *----- Transparency | BackgroundTransparency
 		...getBgColorValues(className), // *----- BackgroundColor3
+		...getBorderColorValues(className), // *----- BorderColor3
+		...getBorderWidthValues(className), // *----- BorderSizePixel
+		...getZIndexValues(className), // *----- ZIndex
 	};
 };

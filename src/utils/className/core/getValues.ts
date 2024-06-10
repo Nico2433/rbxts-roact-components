@@ -20,6 +20,7 @@ interface Calculate {
 interface OptParams {
 	prefixes?: ClassNamePrefix;
 	calculate?: Calculate;
+	preventCalculate?: boolean;
 	defaultValue?: number;
 }
 
@@ -31,7 +32,7 @@ export function getClassNameValues<
 
 export function getClassNameValues<T extends string, K extends string | undefined>(
 	className: string,
-	{ prefixes, calculate, defaultValue = 0 }: OptParams = {},
+	{ prefixes, calculate, preventCalculate, defaultValue = 0 }: OptParams = {},
 ) {
 	const [key, secondKey, thirdKey] = className.split("-");
 
@@ -65,7 +66,7 @@ export function getClassNameValues<T extends string, K extends string | undefine
 	}
 
 	// *----------- ONLY APPLY TO PIXELS
-	if (typeIs(value, "number")) {
+	if (typeIs(value, "number") && !preventCalculate) {
 		if (calculate) {
 			const { method, value: calcValue } = calculate;
 			method === "*" ? (value *= calcValue) : (value /= calcValue);

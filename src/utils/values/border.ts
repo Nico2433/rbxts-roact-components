@@ -7,3 +7,7 @@ export const borderRadiusPrefixes = {
 	"2xl": 4,
 	"3xl": 6,
 };
+
+export const borderWidthPrefixes = {
+	default: 1,
+};

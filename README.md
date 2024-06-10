@@ -44,11 +44,16 @@ This package adds custom components that have compatibility with TailwindCSS cla
 - `rounded-3xl`
         -   Note: Selective corner rounding does not work.
 
+### BorderWidth
+
+- `border`
+
 ### Color
 
 - Supports all Tailwind base colors.
 - `bg`: background
 - `text`: text
+- `border`: border
 
 ### Opacity (percentage-based)
 
@@ -122,6 +127,10 @@ This package adds custom components that have compatibility with TailwindCSS cla
 - `text-left`
 - `text-center`
 - `text-right`
+
+### ZIndex
+
+- `z`
 
 ## Usage
 

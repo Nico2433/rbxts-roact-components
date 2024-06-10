@@ -10,7 +10,7 @@ export const getTextSizeValues = (className: string) => {
 	const props: SizeProps = {};
 
 	matches.forEach((match) => {
-		const validated = getClassNameValues<string>(match, { prefixes: textSizePrefixes });
+		const validated = getClassNameValues(match, { prefixes: textSizePrefixes });
 		getTextSizeProps(validated, props);
 	});
 
@@ -23,7 +23,7 @@ interface SizeProps {
 	value?: number;
 }
 
-const getTextSizeProps = (values: ClassNameValues<string>, props: SizeProps) =>
+const getTextSizeProps = (values: ClassNameValues, props: SizeProps) =>
 	getClassNameProps(values, ({ value }) => {
 		props.value = value;
 	});
