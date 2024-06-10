@@ -1,6 +1,6 @@
 import { getClassName } from "./core";
 
-const flexPattern = ["^flex"];
+const flexPattern = "^flex$";
 
 export const getFlexValues = (className: string) => {
 	const matches = getClassName(className, flexPattern);
