@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { ReactInput } from "../types";
 import { getBaseProps, getInputProps, getTextProps } from "../utils";
-import { UiCorner, UiPadding, UiSizeConstraint } from "./utils";
+import { UiCorner, UiListLayout, UiPadding, UiSizeConstraint } from "./utils";
 
 const TextBox: React.FC<Readonly<ReactInput<TextBox>>> = (props) => {
 	const inputRef = props.forwardRef ?? useRef<TextBox | undefined>(undefined);
@@ -27,6 +27,7 @@ const TextBox: React.FC<Readonly<ReactInput<TextBox>>> = (props) => {
 			<UiPadding className={props.className} />
 			<UiCorner className={props.className} />
 			<UiSizeConstraint className={props.className} />
+			<UiListLayout className={props.className} />
 		</textbox>
 	);
 };

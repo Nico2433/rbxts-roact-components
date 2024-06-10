@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactTextButton } from "../types";
 import { getBaseProps, getButtonProps, getTextProps } from "../utils";
-import { UiCorner, UiPadding, UiSizeConstraint } from "./utils";
+import { UiCorner, UiListLayout, UiPadding, UiSizeConstraint } from "./utils";
 
 const TextButton: React.FC<Readonly<ReactTextButton>> = (props) => {
 	const baseProps = getBaseProps<TextButton>(props);
@@ -22,6 +22,7 @@ const TextButton: React.FC<Readonly<ReactTextButton>> = (props) => {
 			<UiPadding className={props.className} />
 			<UiCorner className={props.className} />
 			<UiSizeConstraint className={props.className} />
+			<UiListLayout className={props.className} />
 		</textbutton>
 	);
 };

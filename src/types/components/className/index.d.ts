@@ -14,3 +14,9 @@ export type BorderRadiusClassName = "rounded";
 export type BorderRadiusValues = "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "full";
 
 export type OpacityClassName = "opacity";
+
+export type AlignClassName = "items";
+export type AlignValues = "start" | "end" | "center";
+
+export type JustifyClassName = "justify";
+export type JustifyValues = "start" | "end" | "center" | "between" | "around" | "evenly";

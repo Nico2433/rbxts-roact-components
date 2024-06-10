@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactImageButton } from "../types";
 import { getBaseProps, getButtonProps, getImageProps } from "../utils";
-import { UiCorner, UiPadding, UiSizeConstraint } from "./utils";
+import { UiCorner, UiListLayout, UiPadding, UiSizeConstraint } from "./utils";
 
 const ImageButton: React.FC<Readonly<ReactImageButton>> = (props) => {
 	const baseProps = getBaseProps<ImageButton>(props);
@@ -22,6 +22,7 @@ const ImageButton: React.FC<Readonly<ReactImageButton>> = (props) => {
 			<UiPadding className={props.className} />
 			<UiCorner className={props.className} />
 			<UiSizeConstraint className={props.className} />
+			<UiListLayout className={props.className} />
 		</imagebutton>
 	);
 };
