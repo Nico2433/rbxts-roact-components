@@ -1,13 +1,15 @@
 import React from "react";
 import { ReactVideoFrame } from "../types";
-import { getBaseProps } from "../utils";
+import { deleteDefaultProps, getBaseProps } from "../utils";
 import { UiCorner, UiListLayout, UiPadding, UiSizeConstraint } from "./utils";
 
 const VideoFrame: React.FC<Readonly<ReactVideoFrame>> = (props) => {
-	const baseProps = getBaseProps<VideoFrame>(props);
+	const passedProps = props;
+	const baseProps = getBaseProps<VideoFrame>(passedProps);
+	deleteDefaultProps(passedProps);
 
 	const baseEvents = baseProps.Event;
-	const extraEvents = props.Event;
+	const extraEvents = passedProps.Event;
 
 	const totalEvents = {
 		...baseEvents,
@@ -15,7 +17,7 @@ const VideoFrame: React.FC<Readonly<ReactVideoFrame>> = (props) => {
 	};
 
 	return (
-		<videoframe {...baseProps} {...props} Event={totalEvents}>
+		<videoframe {...baseProps} {...passedProps} Event={totalEvents}>
 			{props.children}
 			<UiPadding className={props.className} />
 			<UiCorner className={props.className} />

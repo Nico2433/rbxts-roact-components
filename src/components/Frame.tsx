@@ -1,13 +1,15 @@
 import React from "react";
 import type { ReactFrame } from "../types/components";
-import { getBaseProps } from "../utils";
+import { deleteDefaultProps, getBaseProps } from "../utils";
 import { UiCorner, UiListLayout, UiPadding, UiSizeConstraint } from "./utils";
 
 const Frame: React.FC<Readonly<ReactFrame>> = (props) => {
-	const baseProps = getBaseProps<Frame>(props);
+	const passedProps = props;
+	const baseProps = getBaseProps<Frame>(passedProps);
+	deleteDefaultProps(passedProps);
 
 	const baseEvents = baseProps.Event;
-	const extraEvents = props.Event;
+	const extraEvents = passedProps.Event;
 
 	const totalEvents = {
 		...baseEvents,
@@ -15,7 +17,7 @@ const Frame: React.FC<Readonly<ReactFrame>> = (props) => {
 	};
 
 	return (
-		<frame {...baseProps} {...props} Event={totalEvents}>
+		<frame {...baseProps} {...passedProps} Event={totalEvents}>
 			{props.children}
 			<UiPadding className={props.className} />
 			<UiCorner className={props.className} />

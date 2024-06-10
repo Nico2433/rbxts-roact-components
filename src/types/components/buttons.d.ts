@@ -1,6 +1,6 @@
 import type { ReactComponent } from ".";
 
-export interface ReactButtonComponent<T extends GuiButton> extends ReactComponent<T> {
+export interface ReactButtonComponent<T extends GuiButton = GuiButton> extends ReactComponent<T> {
 	onClick?: (rbx: T) => void;
 }
 

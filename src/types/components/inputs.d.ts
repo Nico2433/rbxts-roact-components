@@ -1,5 +1,7 @@
 import { ReactComponent } from ".";
 
-export interface ReactTextBox<T extends GuiObject> extends ReactComponent<T>, React.InstanceProps<TextBox> {
-	onChange?: (rbx: TextBox) => void;
+export interface ReactInputComponent<T extends GuiObject = GuiObject> extends ReactComponent<T> {
+	onChange?: (rbx: T) => void;
 }
+
+export interface ReactTextBox extends ReactInputComponent<TextBox>, React.InstanceProps<TextBox> {}

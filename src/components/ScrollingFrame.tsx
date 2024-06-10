@@ -1,13 +1,15 @@
 import React from "react";
 import { ReactScrollingFrame } from "../types";
-import { getBaseProps } from "../utils";
+import { deleteDefaultProps, getBaseProps } from "../utils";
 import { UiCorner, UiListLayout, UiPadding, UiSizeConstraint } from "./utils";
 
 const ScrollingFrame: React.FC<Readonly<ReactScrollingFrame>> = (props) => {
-	const baseProps = getBaseProps<ScrollingFrame>(props);
+	const passedProps = props;
+	const baseProps = getBaseProps<ScrollingFrame>(passedProps);
+	deleteDefaultProps(passedProps);
 
 	const baseEvents = baseProps.Event;
-	const extraEvents = props.Event;
+	const extraEvents = passedProps.Event;
 
 	const totalEvents = {
 		...baseEvents,
@@ -15,7 +17,7 @@ const ScrollingFrame: React.FC<Readonly<ReactScrollingFrame>> = (props) => {
 	};
 
 	return (
-		<scrollingframe {...baseProps} {...props} Event={totalEvents}>
+		<scrollingframe {...baseProps} {...passedProps} Event={totalEvents}>
 			{props.children}
 			<UiPadding className={props.className} />
 			<UiCorner className={props.className} />
