@@ -132,6 +132,24 @@ This package adds custom components that have compatibility with TailwindCSS cla
 
 - `z`
 
+### Flex
+
+- `flex`
+- `flex-col`
+- `flex-row`
+
+### Justify
+
+- `justify-start`
+- `justify-center`
+- `justify-end`
+
+### Align
+
+- `items-start`
+- `items-center`
+- `items-end`
+
 ## Usage
 
 To use these classes, simply add them to your components as you would with TailwindCSS, and they will be applied with the corresponding Roblox UI transformations.
