@@ -10,14 +10,16 @@ const ImageButton: React.FC<Readonly<ReactImageButton>> = (props) => {
 
 	const baseEvents = baseProps.Event;
 	const buttonEvents = buttonProps.Event;
+	const extraEvents = props.Event;
 
 	const totalEvents = {
 		...baseEvents,
 		...buttonEvents,
+		...extraEvents,
 	};
 
 	return (
-		<imagebutton {...baseProps} {...imageProps} {...buttonProps} Event={totalEvents}>
+		<imagebutton {...baseProps} {...imageProps} {...buttonProps} {...props} Event={totalEvents}>
 			{props.children}
 			<UiPadding className={props.className} />
 			<UiCorner className={props.className} />

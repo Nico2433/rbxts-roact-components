@@ -7,8 +7,16 @@ const ImageLabel: React.FC<Readonly<ReactImageLabel>> = (props) => {
 	const baseProps = getBaseProps<ImageLabel>(props);
 	const imageProps = getImageProps<ImageLabel>(props);
 
+	const baseEvents = baseProps.Event;
+	const extraEvents = props.Event;
+
+	const totalEvents = {
+		...baseEvents,
+		...extraEvents,
+	};
+
 	return (
-		<imagelabel {...baseProps} {...imageProps}>
+		<imagelabel {...baseProps} {...imageProps} {...props} Event={totalEvents}>
 			{props.children}
 			<UiPadding className={props.className} />
 			<UiCorner className={props.className} />

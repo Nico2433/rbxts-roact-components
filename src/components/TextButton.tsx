@@ -10,14 +10,16 @@ const TextButton: React.FC<Readonly<ReactTextButton>> = (props) => {
 
 	const baseEvents = baseProps.Event;
 	const buttonEvents = buttonProps.Event;
+	const extraEvents = props.Event;
 
 	const totalEvents = {
 		...baseEvents,
 		...buttonEvents,
+		...extraEvents,
 	};
 
 	return (
-		<textbutton {...baseProps} {...textProps} {...buttonProps} Event={totalEvents}>
+		<textbutton {...baseProps} {...textProps} {...buttonProps} {...props} Event={totalEvents}>
 			{props.children}
 			<UiPadding className={props.className} />
 			<UiCorner className={props.className} />

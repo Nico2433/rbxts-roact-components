@@ -1,7 +1,8 @@
-import { ReactImageComponent } from "../../types";
+import { ReactComponent } from "../../types";
+import { getImageOpacityValues } from "../className";
 
-export const getImageProps = <T extends GuiObject>({ src }: ReactImageComponent<T>) => {
+export const getImageProps = <T extends GuiObject>({ className = "" }: ReactComponent<T>) => {
 	return {
-		Image: src,
+		...getImageOpacityValues(className), // *----- ImageTransparency
 	};
 };

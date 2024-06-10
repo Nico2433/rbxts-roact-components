@@ -6,4 +6,5 @@ export { default as TextBox } from "./TextBox";
 export { default as TextButton } from "./TextButton";
 export { default as TextLabel } from "./TextLabel";
 export { default as VideoFrame } from "./VideoFrame";
+export { default as ViewPortFrame } from "./ViewPortFrame";
 export * from "./utils";

@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import { ReactInput } from "../types";
-import { getBaseProps, getInputProps, getTextProps } from "../utils";
+import { ReactTextBox } from "../types";
+import { getBaseProps, getTextProps } from "../utils";
 import { UiCorner, UiListLayout, UiPadding, UiSizeConstraint } from "./utils";
 
-const TextBox: React.FC<Readonly<ReactInput<TextBox>>> = (props) => {
+const TextBox: React.FC<Readonly<ReactTextBox<TextBox>>> = (props) => {
 	const inputRef = props.forwardRef ?? useRef<TextBox | undefined>(undefined);
 	const onChange = props.onChange;
 
@@ -19,10 +19,17 @@ const TextBox: React.FC<Readonly<ReactInput<TextBox>>> = (props) => {
 
 	const baseProps = getBaseProps<TextBox>(props, inputRef);
 	const textProps = getTextProps<TextBox>(props);
-	const inputProps = getInputProps<TextBox>(props);
+
+	const baseEvents = baseProps.Event;
+	const extraEvents = props.Event;
+
+	const totalEvents = {
+		...baseEvents,
+		...extraEvents,
+	};
 
 	return (
-		<textbox {...baseProps} {...textProps} {...inputProps}>
+		<textbox {...baseProps} {...textProps} {...props} Event={totalEvents}>
 			{props.children}
 			<UiPadding className={props.className} />
 			<UiCorner className={props.className} />

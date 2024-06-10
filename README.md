@@ -1,6 +1,6 @@
 # @nico2433/rbxts-react-utils
 
-This is a utility package for [@rbxts/react-roblox](https://www.npmjs.com/package/@rbxts/react-roblox), providing custom components with compatibility for TailwindCSS classes to Roblox UI components and other utilities.
+This is a utility package for [@rbxts/react-roblox](https://www.npmjs.com/package/@rbxts/react-roblox), providing custom components with compatibility for [TailwindCSS](https://tailwindcss.com) classes to Roblox UI components and other utilities.
 
 ## Installation
 
@@ -60,6 +60,7 @@ This package adds custom components that have compatibility with TailwindCSS cla
 - `opacity`
 - `bg-opacity`
 - `text-opacity`
+- `image-opacity`
 
 ### Padding
 
@@ -149,6 +150,10 @@ This package adds custom components that have compatibility with TailwindCSS cla
 - `items-start`
 - `items-center`
 - `items-end`
+
+### Gap
+
+- `gap`
 
 ## Usage
 

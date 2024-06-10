@@ -67,3 +67,30 @@ const getTextOpacityProps = (values: ClassNameValues, props: TextProps) =>
 	getClassNameProps(values, ({ value }) => {
 		props.TextTransparency = value;
 	});
+
+const imageOpacityClassNamePattern = "^image%-opacity%-";
+
+export const getImageOpacityValues = (className: string) => {
+	const matches = getClassName(className, imageOpacityClassNamePattern);
+	if (matches.isEmpty()) return;
+
+	const props: ImageProps = {};
+
+	matches.forEach((match) => {
+		const validated = getClassNameValues(match, {
+			calculate: { method: "/", value: 100 },
+		});
+		getImageOpacityProps(validated, props);
+	});
+
+	return props;
+};
+
+interface ImageProps {
+	ImageTransparency?: number;
+}
+
+const getImageOpacityProps = (values: ClassNameValues, props: ImageProps) =>
+	getClassNameProps(values, ({ value }) => {
+		props.ImageTransparency = value;
+	});

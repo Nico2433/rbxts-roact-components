@@ -1,5 +1,5 @@
-import { ReactImageComponent, ReactTextComponent } from ".";
+import { ReactComponent } from ".";
 
-export interface ReactTextLabel extends ReactTextComponent<TextLabel> {}
+export interface ReactTextLabel extends ReactComponent<TextLabel>, React.InstanceProps<TextLabel> {}
 
-export interface ReactImageLabel extends ReactImageComponent<ImageLabel> {}
+export interface ReactImageLabel extends ReactComponent<ImageLabel>, React.InstanceProps<ImageLabel> {}
