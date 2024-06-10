@@ -4,6 +4,8 @@ import { deleteDefaultProps, getBaseProps, getTextProps } from "../utils";
 import { UiCorner, UiListLayout, UiPadding, UiSizeConstraint } from "./utils";
 
 const TextBox: React.FC<Readonly<ReactTextBox>> = (props) => {
+	const className = props.className;
+
 	const passedProps = props;
 	const inputRef = passedProps.forwardRef ?? useRef<TextBox | undefined>(undefined);
 	const onChange = passedProps.onChange;
@@ -33,10 +35,10 @@ const TextBox: React.FC<Readonly<ReactTextBox>> = (props) => {
 	return (
 		<textbox {...baseProps} {...textProps} {...passedProps} Event={totalEvents}>
 			{props.children}
-			<UiPadding className={props.className} />
-			<UiCorner className={props.className} />
-			<UiSizeConstraint className={props.className} />
-			<UiListLayout className={props.className} />
+			<UiPadding className={className} />
+			<UiCorner className={className} />
+			<UiSizeConstraint className={className} />
+			<UiListLayout className={className} />
 		</textbox>
 	);
 };

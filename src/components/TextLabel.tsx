@@ -4,6 +4,8 @@ import { deleteDefaultProps, getBaseProps, getTextProps } from "../utils";
 import { UiCorner, UiListLayout, UiPadding, UiSizeConstraint } from "./utils";
 
 const TextLabel: React.FC<Readonly<ReactTextLabel>> = (props) => {
+	const className = props.className;
+
 	const passedProps = props;
 	const baseProps = getBaseProps<TextLabel>(passedProps);
 	const textProps = getTextProps<TextLabel>(passedProps);
@@ -20,10 +22,10 @@ const TextLabel: React.FC<Readonly<ReactTextLabel>> = (props) => {
 	return (
 		<textlabel {...baseProps} {...textProps} {...passedProps} Event={totalEvents}>
 			{props.children}
-			<UiPadding className={props.className} />
-			<UiCorner className={props.className} />
-			<UiSizeConstraint className={props.className} />
-			<UiListLayout className={props.className} />
+			<UiPadding className={className} />
+			<UiCorner className={className} />
+			<UiSizeConstraint className={className} />
+			<UiListLayout className={className} />
 		</textlabel>
 	);
 };

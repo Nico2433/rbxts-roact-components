@@ -4,6 +4,8 @@ import { deleteDefaultProps, getBaseProps, getButtonProps, getImageProps } from 
 import { UiCorner, UiListLayout, UiPadding, UiSizeConstraint } from "./utils";
 
 const ImageButton: React.FC<Readonly<ReactImageButton>> = (props) => {
+	const className = props.className;
+
 	const passedProps = props;
 	const baseProps = getBaseProps<ImageButton>(passedProps);
 	const imageProps = getImageProps<ImageButton>(passedProps);
@@ -23,10 +25,10 @@ const ImageButton: React.FC<Readonly<ReactImageButton>> = (props) => {
 	return (
 		<imagebutton {...baseProps} {...imageProps} {...buttonProps} {...passedProps} Event={totalEvents}>
 			{props.children}
-			<UiPadding className={props.className} />
-			<UiCorner className={props.className} />
-			<UiSizeConstraint className={props.className} />
-			<UiListLayout className={props.className} />
+			<UiPadding className={className} />
+			<UiCorner className={className} />
+			<UiSizeConstraint className={className} />
+			<UiListLayout className={className} />
 		</imagebutton>
 	);
 };

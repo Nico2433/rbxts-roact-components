@@ -4,6 +4,8 @@ import { deleteDefaultProps, getBaseProps, getButtonProps, getTextProps } from "
 import { UiCorner, UiListLayout, UiPadding, UiSizeConstraint } from "./utils";
 
 const TextButton: React.FC<Readonly<ReactTextButton>> = (props) => {
+	const className = props.className;
+
 	const passedProps = props;
 	const baseProps = getBaseProps<TextButton>(passedProps);
 	const textProps = getTextProps<TextButton>(passedProps);
@@ -23,10 +25,10 @@ const TextButton: React.FC<Readonly<ReactTextButton>> = (props) => {
 	return (
 		<textbutton {...baseProps} {...textProps} {...buttonProps} {...passedProps} Event={totalEvents}>
 			{props.children}
-			<UiPadding className={props.className} />
-			<UiCorner className={props.className} />
-			<UiSizeConstraint className={props.className} />
-			<UiListLayout className={props.className} />
+			<UiPadding className={className} />
+			<UiCorner className={className} />
+			<UiSizeConstraint className={className} />
+			<UiListLayout className={className} />
 		</textbutton>
 	);
 };

@@ -4,6 +4,8 @@ import { deleteDefaultProps, getBaseProps, getImageProps } from "../utils";
 import { UiCorner, UiListLayout, UiPadding, UiSizeConstraint } from "./utils";
 
 const ImageLabel: React.FC<Readonly<ReactImageLabel>> = (props) => {
+	const className = props.className;
+
 	const passedProps = props;
 	const baseProps = getBaseProps<ImageLabel>(passedProps);
 	const imageProps = getImageProps<ImageLabel>(passedProps);
@@ -20,10 +22,10 @@ const ImageLabel: React.FC<Readonly<ReactImageLabel>> = (props) => {
 	return (
 		<imagelabel {...baseProps} {...imageProps} {...passedProps} Event={totalEvents}>
 			{props.children}
-			<UiPadding className={props.className} />
-			<UiCorner className={props.className} />
-			<UiSizeConstraint className={props.className} />
-			<UiListLayout className={props.className} />
+			<UiPadding className={className} />
+			<UiCorner className={className} />
+			<UiSizeConstraint className={className} />
+			<UiListLayout className={className} />
 		</imagelabel>
 	);
 };
